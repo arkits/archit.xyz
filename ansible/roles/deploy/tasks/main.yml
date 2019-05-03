@@ -1,0 +1,13 @@
+---
+- name: Copy public.zip
+  copy:
+    src: ../files/public.zip
+    dest: public.zip
+    mode: 740
+
+
+- name: Run install_blog.sh
+  shell: ./install_blog.sh
+  register: out
+
+- debug: msg="{{ stdout_lines }}"

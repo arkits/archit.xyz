@@ -13,7 +13,5 @@ sudo mv blog /var/www/archit.xyz/html/
 echo "Cleanup"
 rm -rf __MACOSX
 rm public.zip
-rm -rf blog
-rm -rf public
 
 echo "Done!"
