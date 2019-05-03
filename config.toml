@@ -1,0 +1,31 @@
+baseurl = "https://archit.xyz/blog"
+languageCode = "en-us"
+theme = "terminal"
+paginate = 5
+
+[params]
+  contentTypeName = "post"
+  themeColor = "orange"
+  showMenuItems = 2
+  fullWidthTheme = false
+  centerTheme = false
+
+[languages]
+  [languages.en]
+    title = "archit.xyz"
+    subtitle = ""
+    keywords = ""
+    copyright = "(c) archit.xyz. all rights are fucking reserved."
+    menuMore = "Show more"
+    readMore = "Read more"
+    readOtherPosts = "Read other posts"
+
+    [languages.en.params.logo]
+      logoText = "archit.xyz"
+      logoHomeLink = "/blog"
+
+    [languages.en.menu]
+      [[languages.en.menu.main]]
+        identifier = "about"
+        name = "About"
+        url = "/about"
