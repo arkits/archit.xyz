@@ -10,4 +10,4 @@
   shell: ./install_blog.sh
   register: out
 
-- debug: msg="{{ stdout_lines }}"
+- debug: msg="{{ out.stdout_lines }}"
