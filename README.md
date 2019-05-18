@@ -1,1 +1,5 @@
-# blog.archit.xyz
+# archit.xyz
+
+## deploying
+
+run `./deploy.sh`
