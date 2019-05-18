@@ -5,6 +5,11 @@
     dest: public.zip
     mode: 740
 
+- name: Copy install_blog.sh
+  copy:
+    src: ../files/install_blog.sh
+    dest: install_blog.sh
+    mode: 740
 
 - name: Run install_blog.sh
   shell: ./install_blog.sh
