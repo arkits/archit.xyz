@@ -1,4 +1,18 @@
+body {
+    background-color: #202124;
+}
+
 .container {
     border-right: none;
     margin: auto;
+}
+
+#logo-v {
+    padding-top: 50px;
+    height: 250px;
+}
+
+.posts {
+    width: 100%;
+    font-style: italic;
 }

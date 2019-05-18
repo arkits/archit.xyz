@@ -1,4 +1,4 @@
-baseurl = "https://archit.xyz/blog"
+baseurl = "https://archit.xyz/"
 languageCode = "en-us"
 theme = "terminal"
 paginate = 5
@@ -22,10 +22,10 @@ paginate = 5
 
     [languages.en.params.logo]
       logoText = "archit.xyz"
-      logoHomeLink = "/blog"
+      logoHomeLink = "/"
 
     [languages.en.menu]
       [[languages.en.menu.main]]
         identifier = "about"
-        name = "About"
+        name = "about"
         url = "/about"
