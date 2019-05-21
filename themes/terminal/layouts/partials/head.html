@@ -31,6 +31,7 @@
 <meta name="twitter:image" content="{{ with .Params.Cover }}{{ . | absURL }}{{ end }}">
 
 <!-- OG data -->
+
 <meta property="og:locale" content="{{ $.Site.Language.Lang }}" />
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}" />
 <meta property="og:title" content="{{ if .IsHome }}{{ $.Site.Title }} — {{ $.Site.Params.Subtitle }}{{ else }}{{ .Title }} :: {{ $.Site.Title }} — {{ $.Site.Params.Subtitle }}{{ end }}">
@@ -47,6 +48,8 @@
 {{ if .RSSLink }}
 <link href="{{ $.Site.RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" />
 {{ end }}
+
+<meta name="description" content="archit.xyz | Personal blog of Archit Khode | Yada Yada Hi Dharmasya Glanirva Bhavathi Bharatha, Abhyuthanam Adharmaysya Tadatmanam Srijami Aham.">
 
 <!-- JSON Feed -->
 {{ if .OutputFormats.Get "json" }}
