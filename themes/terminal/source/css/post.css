@@ -55,18 +55,6 @@
     margin-top: 30px;
   }
 
-  &-cover {
-    border: 20px solid var(--accent);
-    background: transparent;
-    margin: 40px 0;
-    padding: 20px;
-
-    @media (--phone) {
-      padding: 10px;
-      border-width: 10px;
-    }
-  }
-
   ul {
     list-style: none;
 
