@@ -4,19 +4,30 @@ theme = "terminal"
 paginate = 5
 
 [params]
+  # dir name of your blog content (default is `content/posts`)
   contentTypeName = "post"
+  # ["orange", "blue", "red", "green", "pink"]
   themeColor = "orange"
+  # if you set this to 0, only submenu trigger will be visible
   showMenuItems = 2
+  # show selector to switch language
+  showLanguageSelector = false
+  # set theme to full screen width
   fullWidthTheme = false
-  centerTheme = false
+  # center theme with default width
+  centerTheme = true
+  # set a custom favicon (default is a `themeColor` square)
   favicon = "favicon.ico"
+
+  
 
 [languages]
   [languages.en]
-    title = "archit.xyz"
+    languageName = "English"
+    title = "Archit.xyz"
     subtitle = ""
     keywords = ""
-    copyright = "(c) archit.xyz. all rights are fucking reserved."
+    copyright = ""
     menuMore = "Show more"
     readMore = "Read more"
     readOtherPosts = "Read other posts"
@@ -28,5 +39,9 @@ paginate = 5
     [languages.en.menu]
       [[languages.en.menu.main]]
         identifier = "about"
-        name = "about"
+        name = "About"
         url = "/about"
+      [[languages.en.menu.main]]
+        identifier = "showcase"
+        name = "Showcase"
+        url = "/showcase"

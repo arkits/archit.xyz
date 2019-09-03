@@ -1,5 +1,0 @@
-[tanduv]
-34.217.196.208
-
-[tanduv:vars]
-ansible_user=ec2-user

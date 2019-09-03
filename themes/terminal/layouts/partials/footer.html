@@ -1,14 +1,10 @@
-
-
 <footer class="footer">
-    {{ partial "extended_footer.html" . }}
   <div class="footer__inner">
     {{ if $.Site.Copyright }}
       <div class="copyright copyright--user">{{ $.Site.Copyright | safeHTML }}</div>
     {{else}}
       <div class="copyright">
-        <span>© {{ now.Year }} Powered by <a href="http://gohugo.io">Hugo</a></span>
-        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+        <span>(C) {{ now.Year }} <a href="https://archit.xyz/">archit.xyz</a> / <a href="http://arkits.github.io/">arkits.github.io</a></span>
       </div>
     {{end}}
   </div>
@@ -17,3 +13,5 @@
 <script src="{{ "assets/main.js" | absURL }}"></script>
 <script src="{{ "assets/prism.js" | absURL }}"></script>
 
+<!-- Extended footer section-->
+{{ partial "extended_footer.html" . }}

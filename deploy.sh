@@ -1,20 +1,21 @@
-echo "DEPLOYING BOIS!"
+echo "~~~~ ~~~~ ~~~~ ~~~~ ~~~~"
+echo "archit.xyz deployment"
+echo "~~~~ ~~~~ ~~~~ ~~~~ ~~~~"
 
-echo "Making..."
-./make.sh
+echo "  ==> Creating public..."
+hugo
+
+echo "  ==> Zipping..."
+zip -r public.zip public/
 
 echo "Moving zip to ansible dir"
-mv public.zip ansible/roles/deploy/files/public.zip
+mv public.zip deployment/ansible/roles/deploy/files/
 
 echo "Moving install_blog.sh to ansible dir"
-cp install_blog.sh ansible/roles/deploy/files/install_blog.sh
+cp deployment/install_blog.sh deployment/ansible/roles/deploy/files/
 
 echo "Deploying using ansible..."
-cd ansible
+cd deployment/ansible
 ansible-playbook playbook.yml
-
-# echo "Cleanup..."
-# cd ..
-# rm public.zip
 
 echo "Done!"
