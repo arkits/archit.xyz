@@ -9,7 +9,7 @@ paginate = 5
   # ["orange", "blue", "red", "green", "pink"]
   themeColor = "orange"
   # if you set this to 0, only submenu trigger will be visible
-  showMenuItems = 2
+  showMenuItems = 0
   # show selector to switch language
   showLanguageSelector = false
   # set theme to full screen width
@@ -24,7 +24,7 @@ paginate = 5
 [languages]
   [languages.en]
     languageName = "English"
-    title = "Archit.xyz"
+    title = "archit.xyz"
     subtitle = ""
     keywords = ""
     copyright = ""
