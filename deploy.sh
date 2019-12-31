@@ -2,6 +2,9 @@ echo "~~~~ ~~~~ ~~~~ ~~~~ ~~~~"
 echo "archit.xyz deployment"
 echo "~~~~ ~~~~ ~~~~ ~~~~ ~~~~"
 
+# Stop if there is an error
+set -e
+
 echo "  ==> Creating public..."
 hugo
 
