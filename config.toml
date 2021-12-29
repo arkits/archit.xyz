@@ -1,4 +1,4 @@
-# baseurl = "https://archit.xyz/"
+baseurl = "/"
 languageCode = "en-us"
 theme = "terminal"
 paginate = 5
