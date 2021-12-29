@@ -1,5 +1,5 @@
 :root {
-  --accent: #FF7F50;
+  --accent: #FFA86A;
   --background: color-mod(var(--accent) blend(#1D1E28 98%));
   --color: white;
   --border-color: rgba(255, 255, 255, .1);
@@ -9,5 +9,5 @@
   --tabletWidth: (max-width: 900px);
 }
 
-@custom-media --phone (width < 684px);
-@custom-media --tablet (width < 900px);
+@custom-media --phone (max-width: 684px);
+@custom-media --tablet (max-width: 900px);

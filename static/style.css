@@ -1,32 +1,40 @@
 body {
-    background-color: #202124;
+  background-color: #202124;
 }
 
 .container {
-    border-right: none;
-    margin: auto;
+  border-right: none;
+  margin: auto;
 }
 
 #logo-v {
-    padding-top: 50px;
-    height: 250px;
-}
-
-.special {
-    width: 100%;
+  padding-top: 50px;
+  height: 250px;
 }
 
 .center {
-    width: 100%;
+  width: 100%;
 }
 
-:root {
-    --accent: #FF7F50;
-    --background: color-mod(var(--accent) blend(#202124));
-    --color: white;
-    --border-color: rgba(255, 255, 255, .1);
-  
-    /* variables for js, must be the same as these in @custom-media queries */
-    --phoneWidth: (max-width: 684px);
-    --tabletWidth: (max-width: 900px);
-  }
+.ak__menu {
+  font-size: 1rem !important;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: underline;
+}
