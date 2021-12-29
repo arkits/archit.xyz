@@ -1,9 +1,11 @@
 # archit.xyz
 
-## deploying
+## Deploying
 
 run `./deploy.sh`
 
-## running locally
+## Running Locally
 
-` hugo server -D `
+```
+hugo server -D
+```

@@ -2,4 +2,4 @@
 title = "About"
 +++
 
-A Software Engineer with interdisciplinary experience in Computer Engineering, Computer Science, DevOps, Data Analytics and Business Analysis.
+Archit is a Software Engineer with interdisciplinary experience in Computer Engineering, Computer Science, DevOps, Data Analytics and Business Analysis.

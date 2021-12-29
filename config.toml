@@ -1,4 +1,4 @@
-baseurl = "https://archit.xyz/"
+# baseurl = "https://archit.xyz/"
 languageCode = "en-us"
 theme = "terminal"
 paginate = 5
