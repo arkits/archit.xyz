@@ -1,5 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,700;1,400&display=swap");
+
 body {
   background-color: #202124;
+  font-family: "IBM Plex Sans", sans-serif;
 }
 
 .container {
@@ -18,6 +21,7 @@ body {
 
 .ak__menu {
   font-size: 1rem !important;
+  font-weight: 700;
   display: flex;
   justify-content: center;
   gap: 3rem;
@@ -42,4 +46,8 @@ a:hover {
   font-size: small;
   opacity: 0.5;
   margin-top: 0.2rem;
+}
+
+#archit-profile-img {
+  border-radius: 50%;
 }

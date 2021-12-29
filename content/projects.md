@@ -14,6 +14,8 @@ spring-boot-actuator-cli is a command-line application to interact and visualize
 
 [View on GitHub](https://github.com/arkits/spring-boot-actuator-cli)
 
+{{< line_break >}}
+
 #### onhub-web
 
 {{< image src="/img/ohw-web-ui.png" alt="newtab-screenshot" position="center" >}}
@@ -26,6 +28,8 @@ onhub-web talks to the Google Foyer APIs to retrieve metrics regarding your Goog
 
 [View on GitHub](https://github.com/arkits/onhub-web)
 
+{{< line_break >}}
+
 #### newtab
 
 {{< image src="/img/newtab.png" alt="newtab-screenshot" position="center" >}}
@@ -37,6 +41,8 @@ My custom "new tab" page that displays current news, now playing music, and shor
 [View on GitHub](https://github.com/arkits/newtab)
 [Live Demo](https://newtab.archit.xyz/)
 
+{{< line_break >}}
+
 #### Exige
 
 {{< image src="/img/exige.png" alt="exige-screenshot" position="center" >}}
@@ -46,6 +52,8 @@ Exige is a proof-of-concept traffic visualizer for UAM / UTM data.
 - Technologies used: Javascript, React, Mapbox, Socket.IO
 
 [View on GitHub](https://github.com/arkits/exige)
+
+{{< line_break >}}
 
 #### chaddi-tg
 
