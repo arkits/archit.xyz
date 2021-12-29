@@ -30,3 +30,16 @@ a:link {
 a:hover {
   text-decoration: none;
 }
+
+.about-container {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 0;
+}
+
+.image-caption {
+  font-style: italic;
+  font-size: small;
+  opacity: 0.5;
+  margin-top: 0.2rem;
+}
