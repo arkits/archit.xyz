@@ -106,13 +106,17 @@ And `/env` isn't even scratching the surface...
 - `/threaddump` is always handy when needed for that level of debugging
 - `/loggers` allows you to mutate the logging level on a class-path level - thus letting you turn off those noisy debug statements in production
 - there is `/beans` for the Bean enthusiasts (I don't need to explain you any further - you know who you are).
-- There is also my personal favorite, `/logfile` which literally streams you your log file. All of these great endpoints surely make Actuator a great debug tool... right?
+- There is also my personal favorite, `/logfile` which literally streams you your log file.
 
-If you haven't figured out the problem with Actuator as a debug tool... well it's not - it's an interface - and just like any other interface, it needs a good client to drive it.
+> All of these great endpoints surely make Actuator a great debug tool... right? If you haven't figured out the problem with Actuator as a debug tool... well it's not - it's an interface; and like any other interface, it needs a good client to drive it.
 
 ## Spring Boot Actuator CLI...!
 
-My previous job involved supporting ~12 Backends applications written in Spring, and had to manage them between 3 independent teams' sprints. Naturally, things were breaking and Actuator was used quite often. However, interacting with those 12 Backends, multiplied by environments of dev/qa/prod, can be a massive chore. There were tools to help out in this space - REST clients such as Postman, Insomnia are the notable examples.
+My previous job involved supporting ~12 Backends applications written in Spring, and had to manage them between 3 independent teams' sprints. Naturally, things were breaking and Actuator was used quite often. However, interacting with those 12 Backends, multiplied by environments of dev/qa/prod, can be a massive chore. While, there are definitely some big tools to out in this space - REST clients such as Postman, Insomnia, Paw as the notable examples; none have hit the apex in -
+
+- ease of use / ease of setup
+- parsing the response / understanding what the responses mean.
+- config storage / location of stored variables and credentials
 
 In early 2021, I spent some time building `spring-boot-actuator-cli` - a command-line application to interact and visualize a Spring Boot application's Actuator endpoint's data. Let me walk you through it!
 
