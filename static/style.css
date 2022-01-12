@@ -30,7 +30,7 @@ code {
   display: flex;
   justify-content: center;
   gap: 3rem;
-  padding-bottom: 1rem;
+  padding-bottom: 2rem;
 }
 
 a:link {
