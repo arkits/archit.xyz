@@ -12,7 +12,11 @@ spring-boot-actuator-cli is a command-line application to interact and visualize
 - Supported 'config file' usage, allowing teams to manage complicated micro service fleets collaboratively.
 - Technologies used: GoLang, Java, Spring Boot
 
-[View on GitHub](https://github.com/arkits/spring-boot-actuator-cli)
+[>> View on GitHub](https://github.com/arkits/spring-boot-actuator-cli)
+
+-
+
+[>> Read Blog Post](/posts/sba-cli)
 
 {{< line_break >}}
 
