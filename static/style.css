@@ -52,3 +52,10 @@ a:hover {
 #archit-profile-img {
   border-radius: 50%;
 }
+
+.post-cover {
+  border: 0px !important;
+  margin: 0px !important;
+  padding: 0px !important;
+  margin-top: 2rem !important;
+}
