@@ -105,8 +105,8 @@ And `/env` isn't even scratching the surface...
 
 - `/threaddump` is always handy when needed for that level of debugging
 - `/loggers` allows you to mutate the logging level on a class-path level - thus letting you turn off those noisy debug statements in production
-- there is `/beans` for the Bean enthusiasts (I don't need to explain you any further - you know who you are).
-- There is also my personal favorite, `/logfile` which literally streams you your log file.
+- `/beans` for the Bean-heads (I don't need to explain any further - you know who you are).
+- there is also my personal favorite, `/logfile` which literally streams you your log file.
 
 > All of these great endpoints surely make Actuator a great debug tool... right? If you haven't figured out the problem with Actuator as a debug tool... well it's not - it's an interface; and like any other interface, it needs a good client to drive it.
 
