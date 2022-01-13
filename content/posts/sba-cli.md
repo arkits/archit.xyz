@@ -8,13 +8,13 @@ description = "Exploring the nuances of building CLI tooling to interact and vis
 
 ## Preface
 
-A substantial part of today's modern service infrastructure involves delivering an _application_ ( server / backend / service). The intention of this application could be anything - serving a rendered page, REST API, WebSocket stream, message queue worker etc.
+A substantial part of today's modern service infrastructure involves delivering an _application_ ( server / backend / service / micro-service / API ). The intention of this application could be anything - serving a rendered page, REST API, WebSocket stream, message queue worker etc.
 
 While building the application is one challenge, the real boss-fight begins once the application is deployed to prod, and the team needs to support it. Supporting the application could be a simple task of figuring out which version of the service is deployed, or something more challenging such as mutating a configuration. Due to the ubiquity of these support tasks, teams often dive into building custom tooling for gaining observability and insights into said application. Building these tools has almost become a right of passage into modern application development; and after having built a few, I wanted to capture the nuances, design decisions and the lessons learned.
 
 ## Spring Boot...?
 
-In a _tiny_ nutshell, [Spring Boot](https://spring.io/projects/spring-boot) is a framework to build _applications_ in Java. Think Express in Node, Rails in Ruby, Django in Python (to an extent). The Spring [project](https://spring.io/) pieces together other popular Java projects into a palatable, yet extensible experience. While Spring Boot provides the base to build your applications, the rest of the Spring ['eco-system'](https://spring.io/projects) provides answers for almost every possible type of integration - from Kafka to Kubernetes.
+In a _tiny_ nutshell, [Spring Boot](https://spring.io/projects/spring-boot) is a framework to build _applications_ in Java. Think Express in Node, Rails in Ruby, Django in Python (to an extent). The Spring [project](https://spring.io/) pieces together many popular Java projects into a palatable, yet extensible experience. While Spring Boot provides the base to build your applications, the rest of the Spring ['eco-system'](https://spring.io/projects) provides answers for almost every possible type of integration - from Kafka to Kubernetes.
 
 While Spring is a great solution for quickly standing-up applications, personally I've found it too be a bit to _magical_ in it's details and often requires some goofy workarounds if you don't happen to agree with the 'Spring way'. However, Spring's ease-of-use, decent performance, and strong eco-system of integrations make it a strong candidate to build applications.
 
@@ -138,11 +138,11 @@ $ ./sba-cli health -U http://localhost:8080
 
 With the arguments from the command, sba-cli figures out the right REST call to make, parses the response and prints it out - in a more human readable format.
 
-Please excuse the text rendering on the website; here are [screenshots more of sba-cli in operation](https://github.com/arkits/spring-boot-actuator-cli/blob/main/docs/screenshots/README.md)
+Please excuse the text rendering on the website; here are [more screenshots of sba-cli in action](https://github.com/arkits/spring-boot-actuator-cli/blob/main/docs/screenshots/README.md)
 
 ### Inventory Management
 
-To address the use case of managing multiple micro-services, sba-cli support allows the user to supply an Inventory. An Inventory can be defined in a `config.yaml` file, which sba-cli reads on init. A listing in the Inventory describes an instance of an application - listing the base URL, authorization etc. Here is the sample Inventory -
+To address the use case of managing multiple applications, sba-cli allows the user to supply an Inventory. An Inventory can be defined in a `config.yaml` file, which sba-cli reads on init. A listing in the Inventory describes an instance of an application - defining the base URL, authorization etc. Here is the sample Inventory -
 
 ```yaml
 inventory:
@@ -167,11 +167,18 @@ inventory:
     tags:
       - demo
       - prod
+
+  - name: proxy-service-prod
+    baseURL: https://auth-service-prod
+    authorizationHeader: Basic YXJraXRzOmh1bnRlcjI=
+    tags:
+      - auth
+      - prod
 ```
 
 This Inventory describes 3 instances of the `demo-service`; running on localhost, dev and prod.
 
-After defining multiple services in your Inventory, a specific service can be referred to by passing it's name in the `-S` flag...
+After defining multiple services in your Inventory, a specific service can be referred to by passing it's name rather than the URL...
 
 ```bash
 # ./sba-cli info -S <name of a specific service>
@@ -217,12 +224,12 @@ $ ./sba-cli health -S demo-service-dev,demo-service-prod
 Complicated Inventories can be managed and queried easily with Tags. Each Inventory entry can have a list of string tags associated to it. During runtime, the user can pass a query tag (multiple as a comma-separated string) and sba-cli will match the Inventory appropriately.
 
 ```bash
-$ ./sba-cli health -T dev,prod
->>> demo-service-dev
+$ ./sba-cli health -T prod
+>>> proxy-service-prod
 ┌─────────────────┐
 │      HEALTH     │
 ├────────┬────────┤
-│ status │ UP     │
+│ status │ DOWN   │
 └────────┴────────┘
 
 >>> demo-service-prod
@@ -235,8 +242,8 @@ $ ./sba-cli health -T dev,prod
 
 ### Collaboration through Git
 
-A key motivation for the Inventory file mechanism was for using Git to manage the file, allowing the file to collaboratively updated. The approach would be to commit the file to a 'secrets' repo and extend from there. It does means that access control to the repo is outsourced to whatever is available, which may be acceptable to all.
+A key motivation for the Inventory file mechanism was for using Git to manage the file, allowing the file to collaboratively updated. The approach would be to commit the file to a 'secrets' repo and extend from there. It does means that access control to the repo is outsourced to whatever is available, which may not be acceptable to all.
 
 ## Conclusion
 
-I hope this illustrates the was able to demonstrate the impact of tooling that can have on application development and support.
+I hope this illustrates this was able to demonstrate the impact of tooling that can have on application development and support.
