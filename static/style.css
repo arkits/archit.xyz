@@ -8,6 +8,7 @@ body {
 
 code {
   font-family: "IBM Plex Mono", monospace !important;
+  line-height: normal !important;
 }
 
 .container {
