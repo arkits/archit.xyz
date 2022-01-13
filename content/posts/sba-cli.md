@@ -168,7 +168,7 @@ inventory:
       - demo
       - prod
 
-  - name: proxy-service-prod
+  - name: auth-service-prod
     baseURL: https://auth-service-prod
     authorizationHeader: Basic YXJraXRzOmh1bnRlcjI=
     tags:
@@ -176,7 +176,7 @@ inventory:
       - prod
 ```
 
-This Inventory describes 3 instances of the `demo-service`; running on localhost, dev and prod.
+This Inventory describes 3 instances of the `demo-service` (running on localhost, dev, prod) and 1 instance of the `auth-service` (running only in prod).
 
 After defining multiple services in your Inventory, a specific service can be referred to by passing it's name rather than the URL...
 
@@ -225,7 +225,7 @@ Complicated Inventories can be managed and queried easily with Tags. Each Invent
 
 ```bash
 $ ./sba-cli health -T prod
->>> proxy-service-prod
+>>> auth-service-prod
 ┌─────────────────┐
 │      HEALTH     │
 ├────────┬────────┤
