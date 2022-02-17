@@ -148,7 +148,6 @@ To address the use case of managing multiple applications, sba-cli allows the us
 inventory:
   - name: demo-service
     baseURL: http://localhost:8080
-    authorizationHeader: Basic YXJraXRzOmh1bnRlcjI=
     skipVerifySSL: true
     tags:
       - demo
@@ -156,14 +155,12 @@ inventory:
 
   - name: demo-service-dev
     baseURL: https://demo-service-dev
-    authorizationHeader: Basic YXJraXRzOmh1bnRlcjI=
     tags:
       - demo
       - dev
 
   - name: demo-service-prod
     baseURL: https://demo-service-prod
-    authorizationHeader: Basic YXJraXRzOmh1bnRlcjI=
     tags:
       - demo
       - prod
@@ -221,7 +218,9 @@ $ ./sba-cli health -S demo-service-dev,demo-service-prod
 
 ### Inventory Tagging
 
-Complicated Inventories can be managed and queried easily with Tags. Each Inventory entry can have a list of string tags associated to it. During runtime, the user can pass a query tag (multiple as a comma-separated string) and sba-cli will match the Inventory appropriately.
+Another usage, that allows for "bulk" actions in complicated inventories, is with Tags. Each Inventory entry can have a list of string tags associated to it. During runtime, the user can pass a query tag (multiple as a comma-separated string) and sba-cli will match the Inventory appropriately.
+
+For example, to query all `prod` services -
 
 ```bash
 $ ./sba-cli health -T prod
@@ -242,7 +241,13 @@ $ ./sba-cli health -T prod
 
 ### Collaboration through Git
 
-A key motivation for the Inventory file mechanism was for using Git to manage the file, allowing the file to collaboratively updated. The approach would be to commit the file to a 'secrets' repo and extend from there. It does means that access control to the repo is outsourced to whatever is available, which may not be acceptable to all.
+A key motivation for the Inventory file mechanism was for using Git to manage the file, allowing the file to collaboratively updated. The approach would be to commit the file to a 'secrets' repo, and extend from there with a suitable merge-flow approach to intake changes.
+
+It does means that access control to the repo is outsourced to whatever is available, which may not be acceptable in all cases. However, sba-cli's "portable" architecture allows for automation to be built around it.
+
+### Learn through Experience, not Documentation
+
+An unfortunate fact about the Actuator project, and several other Spring projects, is the depth of [documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html) and the lack of. While the documentation covers most topics, key pieces such as the expected HTTP request params and other esoteric configuration details are left to the user's Google-fu skills. This can be applied to Spring as a whole (and, well to any other framework with so many moving parts).
 
 ## Conclusion
 
