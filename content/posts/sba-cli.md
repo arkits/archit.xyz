@@ -114,7 +114,7 @@ And `/env` isn't even scratching the surface...
 
 ## Spring Boot Actuator CLI...!
 
-My previous job involved supporting ~12 applications written in Spring, and had to manage them between 3 independent teams' sprints. Naturally, things were breaking and Actuator was used heavily to debug the cause. With 12 applications (with multiple copies of dev/qa/prod) in the heat of the moment, even introspecting the heath of one particular application can become a massive chore.
+My previous job involved supporting ~12 applications written in Spring, and had to manage them between 3 independent teams' sprints. Naturally, things were breaking and Actuator was used heavily to debug the cause. With 12 applications (and multiple instances of dev/qa/prod), in the heat of the moment, even introspecting the heath of one particular application can become a massive chore.
 
 I would often see my co-workers wrestle with bash scripts, curl commands, jq queries and env variables to facilitate working with Actuator, however you can imagine that approach getting out of control as the permutations of environments increase. While, there are some big name tools out in this space - REST clients such as Postman, Insomnia, Paw as the notable examples; none have hit the apex in -
 
@@ -138,7 +138,7 @@ $ ./sba-cli health -U http://localhost:8080
 
 With the arguments from the command, sba-cli figures out the right REST call to make, parses the response and prints it out - in a more human readable format.
 
-Please excuse the text rendering on the website; here are [more screenshots of sba-cli in action](https://github.com/arkits/spring-boot-actuator-cli/blob/main/docs/screenshots/README.md)
+Please excuse the text rendering on the blog; here are [some screenshots of sba-cli in action](https://github.com/arkits/spring-boot-actuator-cli/blob/main/docs/screenshots/README.md)
 
 ### Inventory Management
 
@@ -243,12 +243,4 @@ $ ./sba-cli health -T prod
 
 A key motivation for the Inventory file mechanism was for using Git to manage the file, allowing the file to collaboratively updated. The approach would be to commit the file to a 'secrets' repo, and extend from there with a suitable merge-flow approach to intake changes.
 
-It does means that access control to the repo is outsourced to whatever is available, which may not be acceptable in all cases. However, sba-cli's "portable" architecture allows for automation to be built around it.
-
-### Learn through Experience, not Documentation
-
-An unfortunate fact about the Actuator project, and several other Spring projects, is the depth of [documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html) and the lack of. While the documentation covers most topics, key pieces such as the expected HTTP request params and other esoteric configuration details are left to the user's Google-fu skills. This can be applied to Spring as a whole (and, well to any other framework with so many moving parts).
-
-## Conclusion
-
-I hope this illustrates this was able to demonstrate the impact of tooling that can have on application development and support.
+It does means that access control to the repo is outsourced to whatever is available, which may not be acceptable in all cases. However, sba-cli is distributed as a single binary, allowing automation to be built around it.
