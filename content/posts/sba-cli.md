@@ -12,11 +12,15 @@ A substantial part of today's modern service infrastructure involves delivering 
 
 While building the application is one challenge, the real boss-fight begins once the application is deployed to prod, and the team needs to support it. Supporting the application could be a simple task of figuring out which version of the service is deployed, or something more challenging such as mutating a configuration. Due to the ubiquity of these support tasks, teams often dive into building custom tooling for gaining observability and insights into said application. Building these tools has almost become a right of passage into modern application development; and after having built a few, I wanted to capture the nuances, design decisions and the lessons learned.
 
+{{< br >}}
+
 ## Spring Boot...?
 
 In a _tiny_ nutshell, [Spring Boot](https://spring.io/projects/spring-boot) is a framework to build _applications_ in Java. Think Express in Node, Rails in Ruby, Django in Python (to an extent). The Spring [project](https://spring.io/) pieces together many popular Java projects into a palatable, yet extensible experience. While Spring Boot provides the base to build your applications, the rest of the Spring ['eco-system'](https://spring.io/projects) provides answers for almost every possible type of integration - from Kafka to Kubernetes.
 
 While Spring is a great solution for quickly standing-up applications, personally I've found it too be a bit to _magical_ in its details and often requires some goofy workarounds if you don't happen to agree with the 'Spring way'. However, Spring's ease-of-use, decent performance, and strong eco-system of integrations make it a strong candidate to build applications.
+
+{{< br >}}
 
 ## Spring Boot Actuator...?
 
@@ -111,7 +115,11 @@ And `/env` isn't even scratching the surface...
 
 there is also my personal favorite: `/logfile` which literally streams you your log file.
 
+{{< br >}}
+
 > All these great endpoints surely make Actuator a great debug tool... right? If you haven't figured out the problem with Actuator as a debug tool... well it's not - it's an interface; and like any other interface, it needs a good client to drive it.
+
+{{< br >}}
 
 ## Spring Boot Actuator CLI...!
 
@@ -140,6 +148,8 @@ $ ./sba-cli health -U http://localhost:8080
 With the arguments from the command, sba-cli figures out the right REST call to make, parses the response and prints it out - in a more human readable format.
 
 Please excuse the text rendering on the blog; here are [some screenshots of sba-cli in action](https://github.com/arkits/spring-boot-actuator-cli/blob/main/docs/screenshots/README.md)
+
+{{< br >}}
 
 ### Inventory Management
 
@@ -217,6 +227,8 @@ $ ./sba-cli health -S demo-service-dev,demo-service-prod
 └────────┴────────┘
 ```
 
+{{< br >}}
+
 ### Inventory Tagging
 
 Another usage that allows for bulk actions in complicated inventories, is with Tags. Each Inventory entry can have a list of string tags associated with it. During runtime, the user can pass a query tag (multiple as a comma-separated string) and sba-cli will match the Inventory appropriately.
@@ -240,13 +252,17 @@ $ ./sba-cli health -T prod
 └────────┴────────┘
 ```
 
+{{< br >}}
+
 ### Collaboration through Git
 
 A key motivation for the Inventory file mechanism was for using Git to manage the file, allowing the file to be collaboratively updated. The approach would be to commit the file to a 'secrets' repo, and extend from there with a suitable merge-flow approach to intake changes.
 
 It means that access control to the repo is outsourced to whatever is available, which may not be acceptable in all cases. However, sba-cli is distributed as a single binary, allowing automation to be built around it.
 
-The next few sections dive into a few technical details of sba-cli.
+{{< br >}}
+
+The next few sections dive into a few technical details of sba-cli...
 
 ### Under the hood: new curl, who dis?
 
@@ -289,10 +305,18 @@ Flags:
 
 A best effort was made to align the flags with `curl`'s, so as to provide reasonable user experience and a "guessable" set of controls.
 
+{{< br >}}
+
 ### Closing Thoughts
+
+{{< image src="/img/sba-cli-health.png" alt="sba-cli-health" position="center" >}}
 
 With details touching various different topics of tech, the cross-cutting nature of sba-cli, and observability tooling in general, make it a great learning experience in engineering a solution.
 
 Building tooling for humans can be challenging, exhausting, obtuse, but nonetheless - **rewarding**. To me, it's satisfying to see people's workflow improve, thus improving their effectiveness and impact.
 
+{{< br >}}
+
 _Special thanks to @cyber_junkie_ 🙏
+
+{{< br >}}
