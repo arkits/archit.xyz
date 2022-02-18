@@ -294,4 +294,4 @@ With details touching various different topics of tech, the cross-cutting nature
 
 Building tooling for humans can be challenging, exhausting, obtuse, but nonetheless - **rewarding**. To me, it's satisfying to see people's workflow improve, thus improving their effectiveness and impact.
 
-_Special thanks to @cyberjunkie 🙏_
+_Special thanks to @cyber_junkie_ 🙏
