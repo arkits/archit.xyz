@@ -91,7 +91,7 @@ Transfer-Encoding: chunked
 
 A notable aspect about the `/health` actuator, and to illustrate the value of Actuator in the Spring project - other components within your application can implement the [API for submitting custom health indicators](https://www.baeldung.com/spring-boot-health-indicators#customhealthindicators) to the `/health` actuator, which in turn would show up as the updated response for `/health`. Various other Spring projects, such as Spring Kafka and Spring Data JPA, already implement this API thus making `/health` truly useful.
 
-On the other hand, there are actuators with write operations, such as the `/env` actuator which let you mutate the application's env / configurations...
+On the other hand, there are actuators with write operations, such as the `/env` actuator which lets you mutate the application's env / configurations. This is how you would go about a totally common task of updating the `db_password` config in runtime -
 
 ```bash
 $ curl \
@@ -108,7 +108,8 @@ And `/env` isn't even scratching the surface...
 - `/threaddump` is always handy when needed for that level of debugging.
 - `/loggers` allows you to mutate the logging level on a class-path level, thus letting you turn off noisy debug statements in runtime.
 - `/beans` for the Bean-heads (I don't need to explain any further - you know who you are).
-- there is also my personal favorite, `/logfile` which literally streams you your log file.
+
+there is also my personal favorite: `/logfile` which literally streams you your log file.
 
 > All these great endpoints surely make Actuator a great debug tool... right? If you haven't figured out the problem with Actuator as a debug tool... well it's not - it's an interface; and like any other interface, it needs a good client to drive it.
 
