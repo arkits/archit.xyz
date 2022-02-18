@@ -1,6 +1,6 @@
 +++
 title = "Custom Observability Tooling Sagas: Spring Boot Actuator CLI"
-date = "2021-04-07"
+date = "2021-08-04"
 author = "Archit"
 cover = "/img/sba-cli.png"
 description = "Exploring the nuances of building CLI tooling to interact and visualize a Spring Boot application's Actuator endpoint's data."
@@ -16,13 +16,13 @@ While building the application is one challenge, the real boss-fight begins once
 
 In a _tiny_ nutshell, [Spring Boot](https://spring.io/projects/spring-boot) is a framework to build _applications_ in Java. Think Express in Node, Rails in Ruby, Django in Python (to an extent). The Spring [project](https://spring.io/) pieces together many popular Java projects into a palatable, yet extensible experience. While Spring Boot provides the base to build your applications, the rest of the Spring ['eco-system'](https://spring.io/projects) provides answers for almost every possible type of integration - from Kafka to Kubernetes.
 
-While Spring is a great solution for quickly standing-up applications, personally I've found it too be a bit to _magical_ in it's details and often requires some goofy workarounds if you don't happen to agree with the 'Spring way'. However, Spring's ease-of-use, decent performance, and strong eco-system of integrations make it a strong candidate to build applications.
+While Spring is a great solution for quickly standing-up applications, personally I've found it too be a bit to _magical_ in its details and often requires some goofy workarounds if you don't happen to agree with the 'Spring way'. However, Spring's ease-of-use, decent performance, and strong eco-system of integrations make it a strong candidate to build applications.
 
 ## Spring Boot Actuator...?
 
-Actuator is one such member of the previously mentioned Spring eco-system. Actuator is module that once _installed_ into a Spring application, exposes a variety of REST endpoints, which can be programmatically queried and interacted with in order to facilitate typical management related tasks of an application.
+Actuator is one such member of the previously mentioned Spring ecosystem. The module once installed into a Spring application, exposes a variety of REST endpoints, which can be programmatically queried and interacted with, in order to facilitate typical management related tasks of an application.
 
-After setting it up, Actuator is available through the `/actuator` endpoint of your application; here's a sample...
+After setting it up, Actuator is available through the `/actuator` endpoint of your application. Here's a sample...
 
 ```bash
 $ curl -v localhost:8080/actuator
@@ -110,13 +110,13 @@ And `/env` isn't even scratching the surface...
 - `/beans` for the Bean-heads (I don't need to explain any further - you know who you are).
 - there is also my personal favorite, `/logfile` which literally streams you your log file.
 
-> All of these great endpoints surely make Actuator a great debug tool... right? If you haven't figured out the problem with Actuator as a debug tool... well it's not - it's an interface; and like any other interface, it needs a good client to drive it.
+> All these great endpoints surely make Actuator a great debug tool... right? If you haven't figured out the problem with Actuator as a debug tool... well it's not - it's an interface; and like any other interface, it needs a good client to drive it.
 
 ## Spring Boot Actuator CLI...!
 
-My previous job involved supporting ~12 applications written in Spring, and had to manage them between 3 independent teams' sprints. Naturally, things were breaking and Actuator was used heavily to debug the cause. With 12 applications (and multiple instances of dev/qa/prod), in the heat of the moment, even introspecting the heath of one particular application can become a massive chore.
+My previous job involved supporting ~12 applications written in Spring, and we had to manage them between three independent teams' sprints. Naturally, things were breaking and Actuator was used heavily to debug the cause. With 12 applications (and multiple instances of Dev / QA / Prod), in the heat of the moment, even introspecting the health of an application can a massive chore.
 
-I would often see my co-workers wrestle with bash scripts, curl commands, jq queries and env variables to facilitate working with Actuator, however you can imagine that approach getting out of control as the permutations of environments increase. While, there are some big name tools out in this space - REST clients such as Postman, Insomnia, Paw as the notable examples; none have hit the apex in -
+I would often see my co-workers wrestle with bash scripts, curl commands, jq queries and env variables to facilitate working with Actuator, however you can imagine that approach getting out of hand as the permutations of environments increase. While, there are some big name tools out in the space - REST clients such as Postman, Insomnia, Paw as the notable examples; none have hit the apex in -
 
 - ease of use / ease of setup
 - parsing of the responses / understanding what the responses mean
@@ -142,7 +142,7 @@ Please excuse the text rendering on the blog; here are [some screenshots of sba-
 
 ### Inventory Management
 
-To address the use case of managing multiple applications, sba-cli allows the user to supply an Inventory. An Inventory can be defined in a `config.yaml` file, which sba-cli reads on init. A listing in the Inventory describes an instance of an application - defining the base URL, authorization etc. Here is the sample Inventory -
+To address the use-case of managing multiple applications, sba-cli allows the user to supply an Inventory. An Inventory can be defined in a `config.yaml` file, which sba-cli reads on init. A listing in the Inventory describes an instance of an application - defining the base URL, authorization etc. Here is a sample Inventory -
 
 ```yaml
 inventory:
@@ -175,7 +175,7 @@ inventory:
 
 This Inventory describes 3 instances of the `demo-service` (running on localhost, dev, prod) and 1 instance of the `auth-service` (running only in prod).
 
-After defining multiple services in your Inventory, a specific service can be referred to by passing it's name rather than the URL...
+After defining multiple services in your Inventory, a specific service can be referred to by passing its name rather than the URL...
 
 ```bash
 # ./sba-cli info -S <name of a specific service>
@@ -218,7 +218,7 @@ $ ./sba-cli health -S demo-service-dev,demo-service-prod
 
 ### Inventory Tagging
 
-Another usage, that allows for "bulk" actions in complicated inventories, is with Tags. Each Inventory entry can have a list of string tags associated to it. During runtime, the user can pass a query tag (multiple as a comma-separated string) and sba-cli will match the Inventory appropriately.
+Another usage that allows for bulk actions in complicated inventories, is with Tags. Each Inventory entry can have a list of string tags associated with it. During runtime, the user can pass a query tag (multiple as a comma-separated string) and sba-cli will match the Inventory appropriately.
 
 For example, to query all `prod` services -
 
@@ -241,6 +241,57 @@ $ ./sba-cli health -T prod
 
 ### Collaboration through Git
 
-A key motivation for the Inventory file mechanism was for using Git to manage the file, allowing the file to collaboratively updated. The approach would be to commit the file to a 'secrets' repo, and extend from there with a suitable merge-flow approach to intake changes.
+A key motivation for the Inventory file mechanism was for using Git to manage the file, allowing the file to be collaboratively updated. The approach would be to commit the file to a 'secrets' repo, and extend from there with a suitable merge-flow approach to intake changes.
 
-It does means that access control to the repo is outsourced to whatever is available, which may not be acceptable in all cases. However, sba-cli is distributed as a single binary, allowing automation to be built around it.
+It means that access control to the repo is outsourced to whatever is available, which may not be acceptable in all cases. However, sba-cli is distributed as a single binary, allowing automation to be built around it.
+
+The next few sections dive into a few technical details of sba-cli.
+
+### Under the hood: new curl, who dis?
+
+One of the integral pieces of sba-cli is the component that handles the HTTP calls. While that may seem banal, handling the entire HTTP lifecycle in a clean, yet customizable, manner is crucial for the effectiveness of the tooling. Similarly, corporate environments often introduce weird complications in the HTTP call (magic auth headers, uncommon proxy ports, questionable SSL certs), which must be accommodated somehow.
+
+In the context of sba-cli, `MakeHTTPCall` is the central function that abstracts way the details of - setting up the HTTP client, awaiting the response, handling the errors etc. All entry-points to sba-cli are designed to gather the details and funnel them into `MakeHTTPCall`, with the function definition ending up being -
+
+```go
+func MakeHTTPCall(
+    requestMethod string,
+    requestURL string,
+    authorizationHeader string,
+    rangeHeader string,
+    skipVerifySSL bool,
+    // ...
+) (*http.Response, error) {
+    // ...
+}
+```
+
+The other side to this detail would be from the UI/UX perspective - sba-cli, being a command-line app, has to expose these configs as parameter flags for the user. Here are some of the flags returned from the mantext.
+
+```
+$ ./sba-cli health -h
+Interface with /actuator/health
+
+Usage:
+  sba-cli health [flags]
+
+Flags:
+  -B, --actuator-base string   Base of the actuator endpoint (default "actuator")
+  -H, --auth-header string     Authorization Header to use when making the HTTP call
+  -h, --help                   help for health
+      --skip-pretty-print      Skip any pretty printing
+  -K, --skip-verify-ssl        Skip verification of SSL
+  -S, --specific string        Name of a specific Inventory
+  -U, --url string             URL of the target Spring Boot app
+  -V, --verbose                Set whether to output verbose log
+```
+
+A best effort was made to align the flags with `curl`'s, so as to provide reasonable user experience and a "guessable" set of controls.
+
+### Closing Thoughts
+
+With details touching various different topics of tech, the cross-cutting nature of sba-cli, and observability tooling in general, make it a great learning experience in engineering a solution.
+
+Building tooling for humans can be challenging, exhausting, obtuse, but nonetheless - **rewarding**. To me, it's satisfying to see people's workflow improve, thus improving their effectiveness and impact.
+
+_Special thanks to @cyberjunkie 🙏_
