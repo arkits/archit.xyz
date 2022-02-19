@@ -264,6 +264,8 @@ It means that access control to the repo is outsourced to whatever is available,
 
 The next few sections dive into a few technical details of sba-cli...
 
+{{< br >}}
+
 ### Under the hood: new curl, who dis?
 
 One of the integral pieces of sba-cli is the component that handles the HTTP calls. While that may seem banal, handling the entire HTTP lifecycle in a clean, yet customizable, manner is crucial for the effectiveness of the tooling. Similarly, corporate environments often introduce weird complications in the HTTP call (magic auth headers, uncommon proxy ports, questionable SSL certs), which must be accommodated somehow.
@@ -304,6 +306,42 @@ Flags:
 ```
 
 A best effort was made to align the flags with `curl`'s, so as to provide reasonable user experience and a "guessable" set of controls.
+
+{{< br >}}
+
+### Under the hood: Dynamic structures? Never heard of her
+
+After performing the HTTP call, sba-cli parses through the response and prints outs the relevant data in more more human readable format. The approach to the functionality is quite straight-forward - sba-cli traverses the response JSON structure, filtering for the relevant fields, and appending the prettified version to a `Table` struct which finally gets printed into `stdout`.
+
+This task seemingly got complicated when dealing with GoLang's structs - unlike JavaScript, GoLang insists on knowing the complete type definition when marshalling the HTTP response JSON into an usable GoLang struct. This makes it awkward for "dynamic" or custom keys in the struct, which is definitely possible with Actuator. For example, `/env` returns a dump of all environment and configurations, most of which would have custom keys.
+
+I still wanted to solve this problem in GoLang and opted for the [dynamic-struct](https://github.com/Ompluscator/dynamic-struct) library to traverse and manipulate the struct. An unfortunate side effect of this is that the code readability takes a huge hit. For example, here is how the `/actuator` response is parsed to extract all the `hrefs` from a map of `Links` (refer to the /actuator HTTP response at the [beginning](#spring-boot-actuator) of the post) -
+
+```go
+// build the dynamicstruct based on the response
+reader := MakeDynamicStructReader(ActuatorInfoProperties{}, actuatorResponse)
+
+// Extract a dictionary named "Links" map and iterate through each element
+for _, link := range reader.GetField("Links").Interface().(map[string]interface{}) {
+
+    var href string
+
+    // Iterate through each element in the Link
+    for v_k, v_v := range link.(map[string]interface{}) {
+
+        // links[0].href
+        if v_k == "href" {
+            href = fmt.Sprintf("%v", v_v)
+        }
+
+    }
+
+    t.AppendRow(table.Row{href, templated})
+
+}
+```
+
+Even with my best tries at commenting this code, I still have a though time _reading_ through it. While the code isn't functionally doing much, there is a genuine syntactic overload, making it unwelcoming to work with. This would be one avenue that I'd love to explore further...
 
 {{< br >}}
 
