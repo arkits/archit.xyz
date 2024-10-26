@@ -19,7 +19,6 @@ centerTheme = true
 # set a custom favicon (default is a `themeColor` square)
 favicon = "favicon.ico"
 
-
 [languages]
 [languages.en]
 languageName = "English"
@@ -33,3 +32,9 @@ readOtherPosts = "Read other posts"
 [languages.en.params.logo]
 logoText = "archit.xyz"
 logoHomeLink = "/"
+
+[sitemap]
+changeFreq = ''
+disable = false
+filename = 'sitemap.xml'
+priority = -1
