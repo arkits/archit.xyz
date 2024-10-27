@@ -1,3 +1,4 @@
 public/
 public.zip
 deployment/ansible/roles/deploy/files/install_blog.sh
+.DS_Store
