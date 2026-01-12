@@ -6,29 +6,23 @@ theme = "terminal"
 pagerSize = 5
 
 [params]
-# dir name of your blog content (default is `content/posts`)
 contentTypeName = "posts"
-# ["orange", "blue", "red", "green", "pink"]
 themeColor = "orange"
-# if you set this to 0, only submenu trigger will be visible
 showMenuItems = 0
-# show selector to switch language
 showLanguageSelector = false
-# set theme to full screen width
 fullWidthTheme = false
-# center theme with default width
 centerTheme = true
-# set a custom favicon (default is a `themeColor` square)
 favicon = "favicon.ico"
+ReadMore = "Read more"
+readOtherPosts = "Read other posts"
 
-[languages]
 [languages.en]
 languageName = "English"
 title = "archit.xyz // Archit Khode"
 subtitle = "Software Engineer"
 keywords = "archit, khode, software, engineer, archit.xyz"
 menuMore = "Show more"
-readMore = "Read more"
+ReadMore = "Read more"
 readOtherPosts = "Read other posts"
 
 [languages.en.params.logo]
@@ -40,3 +34,10 @@ changeFreq = ''
 disable = false
 filename = 'sitemap.xml'
 priority = -1
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+    guessSyntax = false
+    lineNos = false
+    style = "github-dark"

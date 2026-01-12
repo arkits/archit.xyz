@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,700;1,400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap");
 
+html:root {
+  --accent: #ffa86a !important;
+}
+
 body {
   background-color: #202124;
   font-family: "IBM Plex Sans", sans-serif;
@@ -64,4 +68,31 @@ a:hover {
   margin: 0px !important;
   padding: 0px !important;
   margin-top: 2rem !important;
+}
+
+#logo-v, #archit-profile-img, .post-cover {
+  border: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+
+img#logo-v {
+  border: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+#archit-profile-img {
+  border: none !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  box-shadow: none !important;
+}
+
+img {
+  border: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
