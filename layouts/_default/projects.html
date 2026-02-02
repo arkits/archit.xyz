@@ -1,0 +1,77 @@
+{{ define "main" }}
+<article class="projects-page">
+  <header class="projects-hero">
+    {{ with .Params.kicker }}
+      <p class="projects-kicker">{{ . }}</p>
+    {{ end }}
+    <h1 class="projects-title">{{ .Title | markdownify }}</h1>
+    {{ with .Params.intro }}
+      <p class="projects-intro">{{ . | markdownify }}</p>
+    {{ else }}
+      {{ with .Content }}
+        <div class="projects-intro">{{ . }}</div>
+      {{ end }}
+    {{ end }}
+  </header>
+
+  {{ with .Params.projects }}
+  <div class="projects-grid">
+    {{ range . }}
+    <article class="project-card">
+      <div class="project-media">
+        {{ if .image }}
+          <img src="{{ .image | relURL }}" alt="{{ .image_alt | default (printf "%s preview" .name) }}" loading="lazy">
+        {{ else }}
+          <div class="project-placeholder" aria-hidden="true">
+            <span>{{ .monogram | default (substr .name 0 1 | upper) }}</span>
+          </div>
+        {{ end }}
+      </div>
+      <div class="project-body">
+        <div class="project-header">
+          <h2 class="project-name">{{ .name }}</h2>
+          {{ with .status }}
+            <span class="project-status">{{ . }}</span>
+          {{ end }}
+        </div>
+        {{ with .tagline }}
+          <p class="project-tagline">{{ . }}</p>
+        {{ end }}
+        {{ with .description }}
+          <p class="project-desc">{{ . }}</p>
+        {{ end }}
+        {{ with .highlights }}
+          <ul class="project-highlights">
+            {{ range . }}
+              <li>{{ . }}</li>
+            {{ end }}
+          </ul>
+        {{ end }}
+        <div class="project-meta">
+          {{ with .tech }}
+            <div class="project-tech">
+              {{ range . }}
+                <span>{{ . }}</span>
+              {{ end }}
+            </div>
+          {{ end }}
+          {{ with .year }}
+            <span class="project-year">{{ . }}</span>
+          {{ end }}
+        </div>
+        {{ with .links }}
+          <div class="project-links">
+            {{ range . }}
+              <a class="project-link {{ .style | default "secondary" }}" href="{{ .url | safeURL }}" {{ if hasPrefix .url "http" }}rel="noopener" target="_blank"{{ end }}>
+                {{ .label }}
+              </a>
+            {{ end }}
+          </div>
+        {{ end }}
+      </div>
+    </article>
+    {{ end }}
+  </div>
+  {{ end }}
+</article>
+{{ end }}

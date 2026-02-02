@@ -1,69 +1,82 @@
 ---
 title: "Stuff that I've worked on"
+layout: "projects"
+kicker: "Selected Projects"
+intro: "A handful of builds across web, tooling, and data visualization. Each one started as a personal itch and turned into a product-quality experiment."
+projects:
+  - name: "onhub-web"
+    tagline: "Home network dashboard for Google OnHub and Google Wifi."
+    description: "A web client that pulls metrics from the Google Foyer APIs and turns them into a responsive UI plus Prometheus and Grafana integrations."
+    image: "/img/ohw-web-ui.png"
+    image_alt: "onhub-web dashboard"
+    highlights:
+      - "Built a metrics pipeline to surface device health and performance."
+      - "Shipped a clean UI for monitoring home network devices."
+    tech:
+      - "Go"
+      - "React"
+      - "Prometheus"
+      - "Grafana"
+    links:
+      - label: "View on GitHub"
+        url: "https://github.com/arkits/onhub-web"
+        style: "primary"
+  - name: "spring-boot-actuator-cli"
+    tagline: "CLI companion for Spring Boot Actuator."
+    description: "A command-line app that inspects Actuator endpoints and prints data in human-friendly formats for debugging and operations."
+    image: "/img/sba-cli.png"
+    image_alt: "spring-boot-actuator-cli output"
+    highlights:
+      - "Designed parsers for multiple Actuator endpoints."
+      - "Added config file support for multi-service fleets."
+    tech:
+      - "Go"
+      - "Java"
+      - "Spring Boot"
+    links:
+      - label: "View on GitHub"
+        url: "https://github.com/arkits/spring-boot-actuator-cli"
+        style: "primary"
+      - label: "Read the blog post"
+        url: "/posts/sba-cli"
+        style: "ghost"
+  - name: "newtab"
+    tagline: "Personal new tab dashboard."
+    description: "A configurable start page that surfaces news, now-playing music, and shortcuts to daily tools."
+    image: "/img/newtab.png"
+    image_alt: "newtab dashboard"
+    tech:
+      - "JavaScript"
+    links:
+      - label: "View on GitHub"
+        url: "https://github.com/arkits/newtab"
+        style: "primary"
+      - label: "Live demo"
+        url: "https://newtab.archit.xyz/"
+        style: "ghost"
+  - name: "Exige"
+    tagline: "UAM traffic visualizer."
+    description: "A proof-of-concept visualizer for UAM and UTM data streams with live mapping and event overlays."
+    image: "/img/exige.png"
+    image_alt: "Exige map visualization"
+    tech:
+      - "JavaScript"
+      - "React"
+      - "Mapbox"
+      - "Socket.IO"
+    links:
+      - label: "View on GitHub"
+        url: "https://github.com/arkits/exige"
+        style: "primary"
+  - name: "chaddi-tg"
+    tagline: "Playful Telegram bot."
+    description: "A Telegram bot packed with utilities and chat-enhancing commands."
+    monogram: "CT"
+    tech:
+      - "Python"
+      - "tdlib"
+    links:
+      - label: "View on GitHub"
+        url: "https://github.com/arkits/chaddi-tg"
+        style: "primary"
 ---
-
-#### onhub-web
-
-{{< image src="/img/ohw-web-ui.png" alt="newtab-screenshot" position="center" >}}
-
-onhub-web is the missing web client for interacting with and monitoring Google OnHub and Google Wifi devices.
-
-onhub-web talks to the Google Foyer APIs to retrieve metrics regarding your Google OnHub / Google Home devices. These metrics are then accessible through various avenues including a web UI and Prometheus / Grafana dashboard.
-
-- Technologies used: GoLang, React
-
-[>> View on GitHub](https://github.com/arkits/onhub-web)
-
-{{< line_break >}}
-
-#### spring-boot-actuator-cli
-
-{{< image src="/img/sba-cli.png" alt="newtab-screenshot" position="center" >}}
-
-spring-boot-actuator-cli is a command-line application to interact and visualize a Spring Boot application's Actuator endpoint's data.
-
-- Designed and implemented parsers to print the Actuator endpoint’s data in legible formats.
-- Supported 'config file' usage, allowing teams to manage complicated micro service fleets collaboratively.
-- Technologies used: GoLang, Java, Spring Boot
-
-[>> View on GitHub](https://github.com/arkits/spring-boot-actuator-cli)
-
--
-
-[>> Read Blog Post](/posts/sba-cli)
-
-{{< line_break >}}
-
-#### newtab
-
-{{< image src="/img/newtab.png" alt="newtab-screenshot" position="center" >}}
-
-My custom "new tab" page that displays current news, now playing music, and shortcuts to important places.
-
-- Technologies used: Javascript
-
-[>> View on GitHub](https://github.com/arkits/newtab)
-
-[>> Live Demo](https://newtab.archit.xyz/)
-
-{{< line_break >}}
-
-#### Exige
-
-{{< image src="/img/exige.png" alt="exige-screenshot" position="center" >}}
-
-Exige is a proof-of-concept traffic visualizer for UAM / UTM data.
-
-- Technologies used: Javascript, React, Mapbox, Socket.IO
-
-[>> View on GitHub](https://github.com/arkits/exige)
-
-{{< line_break >}}
-
-#### chaddi-tg
-
-Chaddi Bot has a variety of features to make your Telegram experience a whole lot more fun.
-
-- Technologies used: Python3, tdlib
-
-[>> View on GitHub](https://github.com/arkits/chaddi-tg)
