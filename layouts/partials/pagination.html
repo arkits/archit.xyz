@@ -1,0 +1,7 @@
+{{ if or .Paginator.HasPrev .Paginator.HasNext }}
+<nav class="list-pager" aria-label="Pagination">
+  <span>{{ with .Paginator.Prev }}<a class="card-link" href="{{ .URL }}" rel="prev">← newer posts</a>{{ end }}</span>
+  <span class="list-pager-count">page {{ .Paginator.PageNumber }} / {{ .Paginator.TotalPages }}</span>
+  <span class="list-pager-next">{{ with .Paginator.Next }}<a class="card-link" href="{{ .URL }}" rel="next">older posts →</a>{{ end }}</span>
+</nav>
+{{ end }}

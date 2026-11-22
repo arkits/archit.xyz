@@ -1,0 +1,50 @@
+{{ define "main" }}
+{{- /* Split "Title: Subtitle" on the first colon unless a subtitle is set explicitly. */ -}}
+{{- $title := .Title -}}
+{{- $subtitle := .Params.subtitle -}}
+{{- if and (not $subtitle) (in .Title ": ") -}}
+  {{- $parts := split .Title ": " -}}
+  {{- $title = index $parts 0 -}}
+  {{- $subtitle = delimit (after 1 $parts) ": " -}}
+{{- end -}}
+<article class="post">
+  <header class="post-header">
+    {{ if .Date }}
+      <p class="post-header-meta">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ partial "post-date" . }}</time>
+      </p>
+    {{ end }}
+    <h1 class="post-header-title">{{ $title | markdownify }}</h1>
+    {{ with $subtitle }}
+      <p class="post-header-subtitle">{{ . | markdownify }}</p>
+    {{ end }}
+  </header>
+
+  {{ partial "cover.html" . }}
+
+  {{ if (.Params.Toc | default .Site.Params.Toc) }}
+    <div class="table-of-contents">
+      <h2>
+        {{ (.Params.TocTitle | default .Site.Params.TocTitle) | default "Table of Contents" }}
+      </h2>
+      {{ .TableOfContents }}
+    </div>
+  {{ end }}
+
+  <div class="post-content">
+    {{- with .Content -}}
+      <div>
+        {{ . | replaceRE "(<h[1-9] id=\"([^\"]+)\".+)(</h[1-9]+>)" `${1}<a href="#${2}" class="hanchor" ariaLabel="Anchor">#</a> ${3}` | safeHTML }}
+      </div>
+    {{- end -}}
+  </div>
+
+  {{ if eq .Type $.Site.Params.contentTypeName }}
+    {{ partial "posts_pagination.html" . }}
+  {{ end }}
+
+  {{ if not (.Params.hideComments | default false) }}
+    {{ partial "comments.html" . }}
+  {{ end }}
+</article>
+{{ end }}

@@ -1,0 +1,21 @@
+{{ if or .NextInSection .PrevInSection }}
+<nav class="post-nav" aria-label="More posts">
+  <h2 class="card-year"><span>more posts</span></h2>
+  <div class="post-nav-grid">
+    {{ with .NextInSection }}
+      <a class="card post-nav-card" href="{{ .RelPermalink }}" rel="prev">
+        <span class="post-nav-label">← newer</span>
+        <span class="post-nav-title">{{ .Title | markdownify }}</span>
+        <time class="post-nav-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ partial "post-date" . }}</time>
+      </a>
+    {{ end }}
+    {{ with .PrevInSection }}
+      <a class="card post-nav-card is-older" href="{{ .RelPermalink }}" rel="next">
+        <span class="post-nav-label">older →</span>
+        <span class="post-nav-title">{{ .Title | markdownify }}</span>
+        <time class="post-nav-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ partial "post-date" . }}</time>
+      </a>
+    {{ end }}
+  </div>
+</nav>
+{{ end }}

@@ -12,48 +12,48 @@
   </header>
 
   {{ with .Params.projects }}
-  <div class="projects-list">
+  <div class="card-list">
     {{ $prevYear := "" }}
     {{ range $p := . }}
     {{ if and $p.year (ne $p.year $prevYear) }}
-      <h2 class="projects-year"><span>{{ $p.year }}</span></h2>
+      <h2 class="card-year"><span>{{ $p.year }}</span></h2>
       {{ $prevYear = $p.year }}
     {{ end }}
-    <article class="project-card">
-      <header class="project-head">
-        <h3 class="project-name">{{ $p.name }}</h3>
-        {{ with $p.status }}<span class="project-status">[{{ . }}]</span>{{ end }}
+    <article class="card">
+      <header class="card-head">
+        <h3 class="card-title">{{ $p.name }}</h3>
+        {{ with $p.status }}<span class="card-status">[{{ . }}]</span>{{ end }}
       </header>
 
-      <div class="project-body{{ if $p.image }} has-media{{ end }}">
-        <div class="project-text">
-          {{ with $p.tagline }}<p class="project-tagline">{{ . }}</p>{{ end }}
-          {{ with $p.description }}<p class="project-desc">{{ . | markdownify }}</p>{{ end }}
+      <div class="card-body{{ if $p.image }} has-media{{ end }}">
+        <div class="card-text">
+          {{ with $p.tagline }}<p class="card-tagline">{{ . }}</p>{{ end }}
+          {{ with $p.description }}<p class="card-desc">{{ . | markdownify }}</p>{{ end }}
           {{ with $p.highlights }}
-            <ul class="project-highlights">
+            <ul class="card-highlights">
               {{ range . }}<li>{{ . | markdownify }}</li>{{ end }}
             </ul>
           {{ end }}
         </div>
         {{ with $p.image }}
-          <figure class="project-media">
+          <figure class="card-media">
             <img src="{{ . | relURL }}" alt="{{ $p.image_alt | default (printf "%s preview" $p.name) }}" loading="lazy">
           </figure>
         {{ end }}
       </div>
 
       {{ if or $p.tech $p.links }}
-      <footer class="project-foot">
+      <footer class="card-foot">
         {{ with $p.tech }}
-          <ul class="project-tech" aria-label="Tech stack">
+          <ul class="card-tags" aria-label="Tech stack">
             {{ range . }}<li>{{ . }}</li>{{ end }}
           </ul>
         {{ end }}
         {{ with $p.links }}
-          <nav class="project-links" aria-label="{{ $p.name }} links">
+          <nav class="card-links" aria-label="{{ $p.name }} links">
             {{ range . }}
               {{ $external := hasPrefix .url "http" }}
-              <a class="project-link" href="{{ .url | safeURL }}" {{ if $external }}rel="noopener" target="_blank"{{ end }}>{{ .label }}{{ if $external }}<span aria-hidden="true"> ↗</span>{{ end }}</a>
+              <a class="card-link" href="{{ .url | safeURL }}" {{ if $external }}rel="noopener" target="_blank"{{ end }}>{{ .label }}{{ if $external }}<span aria-hidden="true"> ↗</span>{{ end }}</a>
             {{ end }}
           </nav>
         {{ end }}

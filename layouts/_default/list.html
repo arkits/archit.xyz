@@ -1,0 +1,62 @@
+{{ define "main" }}
+<div class="posts-page">
+  {{ with .Content }}
+    <div class="index-content">
+      {{ . }}
+    </div>
+  {{ end }}
+
+  <div class="card-list">
+    {{ $prevYear := "" }}
+    {{ range .Paginator.Pages }}
+    {{ $year := .Date.Format "2006" }}
+    {{ if and (not .Date.IsZero) (ne $year $prevYear) }}
+      <h2 class="card-year"><span>{{ $year }}</span></h2>
+      {{ $prevYear = $year }}
+    {{ end }}
+    <article class="card post-card">
+      <header class="card-head">
+        {{ if .Date }}
+          <time class="card-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ partial "post-date" . }}</time>
+        {{ end }}
+      </header>
+
+      {{ $cover := "" }}
+      {{ with .Params.cover }}{{ $cover = . | relURL }}{{ end }}
+      <div class="card-body{{ if $cover }} has-media{{ end }}">
+        <div class="card-text">
+          <h3 class="card-title post-card-title">
+            <a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a>
+          </h3>
+          {{ if .Description }}
+            <p class="card-desc">{{ .Description | markdownify }}</p>
+          {{ else }}
+            <p class="card-desc">{{ .Summary | plainify | truncate 240 }}</p>
+          {{ end }}
+        </div>
+        {{ with $cover }}
+          <figure class="card-media">
+            <img src="{{ . }}" alt="" loading="lazy">
+          </figure>
+        {{ end }}
+      </div>
+
+      <footer class="card-foot">
+        {{ with .Params.tags }}
+          <ul class="card-tags" aria-label="Tags">
+            {{ range . }}<li><a href="{{ (urlize (printf "tags/%s/" .)) | absLangURL }}">#{{ . }}</a></li>{{ end }}
+          </ul>
+        {{ else }}
+          <span></span>
+        {{ end }}
+        <nav class="card-links">
+          <a class="card-link" href="{{ .RelPermalink }}">read →</a>
+        </nav>
+      </footer>
+    </article>
+    {{ end }}
+  </div>
+
+  {{ partial "pagination.html" . }}
+</div>
+{{ end }}
