@@ -1,9 +1,6 @@
 {{ define "main" }}
 <article class="projects-page">
   <header class="projects-hero">
-    {{ with .Params.command }}
-      <p class="projects-cmd"><span class="projects-cmd-prompt">$</span> {{ . }}</p>
-    {{ end }}
     <h1 class="projects-title">{{ .Title | markdownify }}</h1>
     {{ with .Params.intro }}
       <p class="projects-intro">{{ . | markdownify }}</p>
@@ -15,18 +12,17 @@
   </header>
 
   {{ with .Params.projects }}
-  <ol class="projects-list">
-    {{ range $i, $p := . }}
-    <li class="project-card">
+  <div class="projects-list">
+    {{ $prevYear := "" }}
+    {{ range $p := . }}
+    {{ if and $p.year (ne $p.year $prevYear) }}
+      <h2 class="projects-year"><span>{{ $p.year }}</span></h2>
+      {{ $prevYear = $p.year }}
+    {{ end }}
+    <article class="project-card">
       <header class="project-head">
-        <span class="project-index">{{ printf "%02d" (add $i 1) }}</span>
-        <h2 class="project-name"><span class="project-path">~/</span>{{ $p.name }}</h2>
-        {{ if or $p.year $p.status }}
-          <span class="project-stamp">
-            {{ with $p.year }}<span class="project-year">{{ . }}</span>{{ end }}
-            {{ with $p.status }}<span class="project-status">[{{ . }}]</span>{{ end }}
-          </span>
-        {{ end }}
+        <h3 class="project-name">{{ $p.name }}</h3>
+        {{ with $p.status }}<span class="project-status">[{{ . }}]</span>{{ end }}
       </header>
 
       <div class="project-body{{ if $p.image }} has-media{{ end }}">
@@ -63,9 +59,9 @@
         {{ end }}
       </footer>
       {{ end }}
-    </li>
+    </article>
     {{ end }}
-  </ol>
+  </div>
   {{ end }}
 </article>
 {{ end }}
