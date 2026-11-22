@@ -1,47 +1,43 @@
 +++
-title = "onhub-web: A Local Dashboard for Google Wifi and OnHub"
+title = "onhub-web: Finally, a Real Dashboard for Google Wifi"
 date = "2026-02-02"
 author = "Archit"
-description = "onhub-web provides a local web UI and metrics pipeline to monitor Google Wifi and OnHub devices."
+description = "onhub-web gives you a local web dashboard and metrics for Google Wifi and OnHub devices."
 tags = ["networking", "observability", "prometheus", "grafana", "react", "golang"]
 +++
 
-Most home and small-office routers ship with apps that feel opaque. You can see a few devices, maybe reboot the network, but the data is locked inside a mobile UI.
+Google Wifi's official app is... fine. You can see your devices, run a speed test, reboot things when they break. But if you've ever wanted to actually *monitor* your network rather than just glance at it, you're out of luck.
 
-onhub-web turns that data into a local dashboard and observability pipeline you control.
+That's where onhub-web comes in. It unlocks the data your Google Wifi and OnHub devices are already collecting and gives you a real dashboard and metrics pipeline.
 
-## The Big Idea
+## How It Works
 
-Google Wifi and OnHub devices expose internal APIs (the Google Foyer APIs) that contain a lot more information than the default apps surface. onhub-web talks to those APIs and makes the data accessible through a web UI and metrics.
+These devices actually expose internal APIs (Google's Foyer APIs) with way more data than the mobile app shows you. onhub-web talks to those APIs directly and makes everything available through a web UI plus time-series metrics.
 
-In practice, that means a real dashboard for your network -- not just a glossy app screen.
+Think of it as turning your home router into actual infrastructure you can observe.
 
-## What the Dashboard Covers
+## What You Actually Get
 
-The project surfaces the core parts of network health and device behavior:
+The dashboard shows you the stuff you actually care about:
 
-- **Device health** so you can see status at a glance.
-- **Overview and network pages** for high-level metrics.
-- **Devices view** to list connected clients.
-- **Queries history** for activity visibility.
-- **Family pause and unpause controls** for managing access windows.
+- **Device health** at a glance — see what's online, what's struggling, what's just given up
+- **Network overview** with the metrics that matter
+- **Connected devices list** — finally, an actual list you can search through
+- **Query history** to see what's been happening on your network
+- **Family controls** — pause and unpause internet access for specific devices
 
-## Observability Built In
+## Prometheus and Grafana, Because Of Course
 
-The UI is only half the story. onhub-web also provides a collector to feed metrics into Prometheus, with Grafana dashboards available for visualization.
+The UI is nice, but the real power is the metrics pipeline. onhub-web includes a collector that feeds data into Prometheus, with pre-built Grafana dashboards ready to go.
 
-That means you can track trends over time and integrate home network metrics with the rest of your monitoring stack.
+Now you can see trends over time. Is your network slower in the evenings? Is one device going haywire? You'll actually know instead of guessing.
 
-## Why This Matters
+## Why I Built This
 
-onhub-web treats home networking like real infrastructure:
+I got tired of treating my home network like a black box. If I'm going to have a "smart" router, I want to actually see what it's doing.
 
-- Data is not trapped in a phone app.
-- You get time series metrics, not just snapshots.
-- Everything runs locally, which keeps private network data private.
+- No more data trapped in a phone app
+- Real time-series metrics, not just snapshots
+- Everything stays local — your network data stays yours
 
-## Closing Thoughts
-
-onhub-web is a great example of applying software engineering discipline to the place you actually live and work. It brings observability to your network, turns black-box devices into measurable systems, and gives you a UI that respects power users.
-
-If you have ever wished Google Wifi or OnHub felt more like a real piece of infrastructure, this project is the missing layer.
+onhub-web brings software engineering rigor to the network you actually use every day. If you've ever wished Google Wifi felt more like real infrastructure, this is what you're looking for.

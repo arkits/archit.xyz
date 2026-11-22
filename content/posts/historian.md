@@ -1,69 +1,66 @@
 +++
-title = "Historian: A Local-First Search Engine for Your Browser History"
+title = "Historian: Actually Search Your Browser History"
 date = "2026-02-02"
 author = "Archit"
-description = "Historian turns your saved browser history into a local, searchable dataset with full-text, entity, and metadata search."
+description = "Historian turns your browser history into a searchable, local database with full-text search, entity extraction, and SQL queries."
 tags = ["local-first", "productivity", "browser", "search", "postgres"]
 +++
 
-Your browser history is a strangely valuable dataset. It tells a story about what you learned, what you shipped, and which tabs you never closed. But most history tools treat it as disposable: you can scroll, you can delete, and that is about it.
+Your browser history knows more about you than most of your apps combined. Every article you read, every docs page you visited at 2 AM, every Stack Overflow tab you left open for three weeks — it's all in there.
 
-Historian flips that on its head. It treats your history like a dataset worth exploring -- privately, locally, and with the same rigor you would apply to application logs or analytics.
+But good luck finding any of it. Standard browser history search is basically useless. You get titles and URLs, that's it. Goodbye to finding that blog post you read last month if you don't remember the exact title.
 
-## The Problem: History Is Locked Away
+Historian fixes this. It treats your history like the valuable dataset it actually is, and gives you proper search tools to dig through it.
 
-Browser history typically lives in a database you never touch. You cannot:
+## The Problem: Your History Is There, But Useless
 
-- Search across page contents, not just titles.
-- Ask questions like "show me all pages that mention X" or "every time I searched for Y in the last 12 months."
-- Run custom queries against your own browsing data.
+Browser history is stored in a SQLite database you never touch. Want to search the actual *content* of pages you visited? Nope. Want to find "that article about Postgres indexing I read sometime last year"? Good luck.
 
-If the data exists, why not make it usable?
+The data exists. You're just not allowed to use it properly.
 
-## The Approach: Local-First, Zero-Drama
+## The Solution: Just Make It Local
 
-Historian is built to be fully local. It does not require a hosted service or a cloud account. It also brings its own Postgres database, so you do not need to spin up Docker or manage a separate database instance.
+Historian runs entirely on your machine. No cloud service, no accounts, no "we value your privacy" while they mine your data. It even bundles its own Postgres database so you don't need to mess with Docker or setup.
 
-That design choice matters. It keeps your browsing history on your machine and removes the operational overhead that would otherwise stop you from using the tool at all.
+Your history stays yours. Novel concept.
 
-## What Historian Lets You Do
+## What You Can Actually Do
 
-Historian is more than a log viewer. It is a query engine for your personal web archive.
+Historian is a query engine for your personal web archive. Here's what that means:
 
-### 1) Search By Page Contents
+### 1) Search Page Contents
 
-Most history tools index only titles and URLs. Historian indexes page contents so you can search for the actual text you read, even if the page title was vague.
+Most tools only index titles. Historian grabs the actual page content so you can search for what you *read*, not just what the tab was called.
 
-### 2) Search By Entities
+### 2) Find Things By Entity
 
-The system extracts and indexes entities -- people, places, and organizations -- so you can find everything you read about a topic without guessing exact keywords.
+The system pulls out people, places, organizations, topics — then indexes those too. Search for "Kubernetes" and get everything you've read about it, even if the word "Kubernetes" wasn't in the title.
 
-### 3) Search By Metadata
+### 3) Filter By Metadata
 
-Looking for a page by domain, visit time window, or other metadata? That is supported too.
+Domain, time range, visit count — slice your history however you want.
 
-### 4) SQL Playground
+### 4) Write Actual SQL
 
-If you are the kind of person who wants to ask more complicated questions, Historian exposes a SQL playground so you can query the data directly.
+If you're the type who thinks "I could write a query for that," Historian gives you a SQL playground. Ask complex questions. Join things. Go wild.
 
-### 5) Delete With Intent
+### 5) Clean Up Safely
 
-Sometimes you want to clean up. Historian allows deleting entries, which is safer than poking directly at browser storage.
+Sometimes you want to delete history without the risk of corrupting your browser's database. Historian handles that too.
 
-## Importing History Without the Pain
+## Importing Is Actually Easy
 
-Every browser stores history slightly differently. Historian tackles this with custom migrations per browser, so importing data is a one-time setup instead of a perpetual headache.
+Every browser stores history differently. Historian handles this with custom importers — one-time setup, then you're done. It supports Chrome, Firefox, Safari, and Edge out of the box.
 
-## Who This Is For
+## Who's This For?
 
-Historian is for anyone who wants to treat their browsing history as an asset:
+- Developers who fall down research rabbit holes and need to find their way back
+- Writers collecting sources and references
+- Anyone who wants a searchable archive of what they've learned
+- People who just really like having control over their own data
 
-- Engineers debugging research rabbit holes.
-- Writers tracking what they have read.
-- People who want a personal, local "knowledge trail" they control.
+## The Bottom Line
 
-## Closing Thoughts
+Historian proves that local-first software doesn't have to feel limiting. You keep your data, you get real search power, and you don't need to run a server farm to make it work.
 
-Historian is a reminder that local-first software can feel powerful, not limiting. You keep your data. You get real query power. And you do not have to run infrastructure to make it work.
-
-If you have ever wished your browser history were more than a scrollable list, Historian is the tool that makes it useful.
+If you've ever wished your browser history was actually useful, this is the tool that makes it happen.

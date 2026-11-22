@@ -1,19 +1,18 @@
 +++
-title = "Ludo: Project Overview (Draft)"
+title = "Ludo: Building a Multiplayer Board Game"
 date = "2026-02-02"
 author = "Archit"
-description = "Draft post awaiting repository access and details."
+description = "A multiplayer Ludo game — details coming soon."
 tags = ["draft", "game", "multiplayer"]
 draft = true
 +++
 
-I could not access the `arkits/ludo` repository from the public GitHub URL, so this is a placeholder draft.
+Still working on this one. It's a multiplayer Ludo game, but I need to organize the details before writing it up.
 
-## What I Need To Finalize This Post
+What I'll cover when it's ready:
+- How the game mechanics work (turns, dice, captures)
+- The tech stack and architecture
+- Handling real-time multiplayer
+- Any interesting challenges or decisions
 
-- The README or a short project summary.
-- The tech stack (language, frameworks, hosting).
-- Core features or gameplay loop.
-- Anything that makes this project unique.
-
-Once I have those details, I can turn this into a full post matching the tone and depth of the others.
+Check back soon.

@@ -1,143 +1,141 @@
 ---
-title: "FLYBY2: Bringing a 90s Screensaver to the Modern Web"
+title: "FLYBY2: Resurrecting a 90s Screensaver with AI and React"
 date: "2025-12-10"
-description: "How an AI-assisted rebuild transformed a vintage Windows 95 screensaver into an interactive web experience using React, Three.js, and a whole lot of vibes."
+description: "How I used AI tools to port 30-year-old C code into a modern web screensaver — and why 'vibe coding' actually works."
 tags: ["react", "three.js", "screensaver", "vibe-coding", "retro"]
 ---
 
-There's something magical about screen savers from the Windows 95 era. They represented a time when computers were becoming powerful enough to render complex 3D graphics in real-time, yet still simple enough that a single developer could build something remarkable from scratch.
+There's something about 90s screensavers. Before computers had reliable power management, we needed them to prevent burn-in. But developers turned that limitation into art. Mystify. 3D Pipes. And of course, FLYBY2.
 
-FLYBY2 was exactly that—a mesmerizing screensaver showing aircraft performing aerial maneuvers over a stylized landscape. Originally developed in the 1990s by Soji Yamakawa (captainys on GitHub), who would later go on to create YS Flight, FLYBY2 captured the imagination of anyone who encountered it. The screensaver was even found on a "crusty old Windows 95 computer originally from Lockheed Martin," as noted by Lazy Game Reviews in their coverage of this forgotten piece of computing history.
+FLYBY2 was mesmerizing — aircraft looping and rolling over a wireframe landscape. Originally written by Soji Yamakawa in the mid-90s (who later created YS Flight), it was even found on old Lockheed Martin machines. It was simple, elegant, and hypnotic.
 
-This is the story of how FLYBY2 was resurrected using modern web technologies—and how using **AI tools to port 30-year-old C code** became a testament to what's possible when you embrace "vibe coding."
+Fast forward 30 years. The source code was open-sourced in 2022, but good luck running a Windows 95 screensaver today. I wanted to bring it back.
 
-## The Original: A Labor of Love
+## The Original
 
-The original FLYBY2 was written in C, targeting both Windows and the FM Towns OS. It featured:
+FLYBY2 was written in C, targeting Windows and the FM Towns (a Japanese computer from the 90s). It had:
 
 - Custom aircraft models in a proprietary SRF format
-- Procedurally generated flight paths with loops, barrel rolls, and figure-8s
-- A distinct visual style with blue grid lines and simple geometry
-- Multiple aircraft models including the F-16, F-18, F-15, F-14, Su-27, and MiG-21
+- Procedurally generated flight paths with loops and barrel rolls
+- That distinctive blue-grid aesthetic
+- Multiple aircraft: F-16, F-18, F-15, F-14, Su-27, MiG-21
 
-What made FLYBY2 special wasn't just its visuals—it was the elegant simplicity of its flight mathematics. The code used a clever step-based maneuver system where aircraft would execute a series of "ahead," "pitch," "bank," and "turn" commands to create complex aerial choreography.
+The flight math was surprisingly elegant. Instead of complex physics simulation, it used a step-based system: "go forward," "pitch up," "bank left," "turn right." String those together and you get aerial choreography.
 
-## The Rebuild: Why Modernize?
+## The Plan
 
-The original FLYBY2 source code was recovered from backups and released as open source in 2022. But running a Windows 95 screensaver in 2025 is impractical. The question became: how do we preserve this piece of computing history while making it accessible to a new generation?
+Rebuild it for the web. But I didn't want to manually port 30-year-old C code line by line. Life's too short.
 
-The answer was clear—build a web version.
+Enter AI.
 
-## The Stack: Modern Tools for a Retro Project
+## The Stack
 
-The rebuild chose a stack that balances modern development practices with the kind of simplicity that made the original special:
+Pretty standard modern web stuff:
 
-- **React 19** for the UI and component structure
-- **TypeScript** for type safety (because we're not animals)
-- **Three.js** via **React Three Fiber** for 3D rendering
-- **Vite** for lightning-fast development and builds
-- **CSS Modules** for that cyberpunk aesthetic
+- **React 19** for UI
+- **TypeScript** because types prevent headaches
+- **Three.js** via **React Three Fiber** for 3D
+- **Vite** for fast builds
+- **CSS Modules** for that retro look
 
-But the real story isn't about the tools—it's about how they were used.
+But the interesting part isn't the stack — it's how AI handled the translation.
 
-## Vibe Coding: AI as the Copilot
+## Vibe Coding: AI as Pair Programmer
 
-"Build fast, ask questions later" might not be in any official software development methodology, but with modern AI tools, it should be.
+You've probably heard the term "vibe coding" — basically, letting AI handle the tedious stuff while you focus on the fun parts. That's exactly what this project was.
 
-The FLYBY2 rebuild embraced **vibe coding**—specifically, using LLMs (like Claude and ChatGPT) to handle the heavy lifting of translation so I could focus on the aesthetic and the "feel." I wasn't just writing code; I was directing a senior engineer who happened to be an AI.
+I wasn't writing code so much as directing an AI pair programmer who happens to know C, TypeScript, 3D graphics, and vintage file formats.
 
-Here is how the AI-first approach manifested:
+### The SRF Parser
 
-### 1. The SRF Parser: From C Structs to Interfaces
+The aircraft models used a custom binary format. Writing a parser from scratch means dealing with:
+- Binary struct layouts
+- 15-bit color encoding (GRB555 format)
+- Byte alignment issues
 
-The original aircraft models used a custom format called SRF. Manually rewriting a C binary parser into TypeScript is tedious and error-prone.
+I pasted the original C structs into Claude and asked: "Convert this to TypeScript and handle the 15-bit color."
 
-Instead, I pasted the original C structs into the LLM and asked: _"Act as a graphics engineer. Convert this C struct to a TypeScript interface and write a parser for the 15-bit color encoding."_
-
-It immediately recognized the 15-bit GRB555 format (where Green is the high bit, not Red) and spit out the bit-shifting logic:
+It immediately understood the GRB555 format — green in the high bits, not red — and generated the bit-shifting:
 
 ```typescript
-// The AI correctly identified the bit shifting required for GRB555
+// AI nailed the bit shifting for GRB555
 const r = (color15 >> 10) & 0x1f;
 const g = (color15 >> 5) & 0x1f;
 const b = color15 & 0x1f;
 
-// Normalize to 0-1 range for Three.js
+// Convert to 0-1 range for Three.js
 return new THREE.Color(r / 31, g / 31, b / 31);
 ```
 
-This is the essence of vibe coding: I didn't need to spend two hours debugging hex codes. I just verified the output, saw the planes render correctly, and moved on.
+I didn't spend two hours debugging hex codes. I verified the output worked, saw the planes render, and moved on.
 
-### 2. Flight Controller: Porting the Magic Numbers
+### The Flight Math
 
-The original FLYBY used a 16-bit angle system where `0x10000` equals a full circle. When I asked the AI to explain the movement logic, it suggested keeping the original constants rather than trying to convert everything to standard radians immediately.
+The original used a 16-bit angle system where `0x10000` = full circle. When I asked about converting to radians, the AI suggested keeping the original constants.
 
-We kept the "magic numbers" verbatim:
+Smart move. We preserved:
+- `PITCH_RATE = 8192` per second
+- `BANK_RATE = 32768` per second
 
-- `PITCH_RATE = 8192` (per second)
-- `BANK_RATE = 32768` (per second)
+These "magic numbers" weren't arbitrary — they defined how the aircraft *felt*. Change them and it's not FLYBY2 anymore.
 
-This preserved the _physics_ of the original. An aircraft that banks too slowly or turns too quickly wouldn't be FLYBY2.
+### The CRT Look
 
-### 3. Visuals: Cyberpunk Aesthetics
+The original had blue grid lines and simple geometry. I wanted to keep that but add a CRT monitor effect.
 
-The original FLYBY2 had a distinct look: blue grid lines and simple geometry. I wanted to enhance this with a "CRT Monitor" feel without rewriting a custom shader from scratch.
+I described the vibe: "Green scanlines, slight chromatic aberration, vignette, like a 90s high-tech display."
 
-I described the vibe to the AI: _"Give me a React Three Fiber setup that looks like a high-tech 90s CRT monitor. Green scanlines, slight chromatic aberration, and a vignette."_
+The AI generated the post-processing shaders. Took seconds, looked perfect.
 
-It generated the post-processing configuration in seconds.
+## What The Rebuild Actually Does
 
-## Key Features of the Modern Build
+### Dynamic Camera
 
-### Dynamic Camera System
+The camera positions itself randomly around the action at each maneuver change. Presets for ground level, flight level, and aerial view. Mouse wheel controls zoom from 3° to 90° FOV.
 
-The camera doesn't just sit in one place. It randomly positions itself around the action at each maneuver change, with presets for low (ground level), medium (flight level), and high (aerial view). Zoom is controllable via mouse wheel, with a range from tight 3° FOV to wide 90°.
+### Telemetry Panel
 
-### Real-Time Telemetry Panel
+Real-time altitude, speed, heading, pitch/bank angles, and maneuver progress. Used a ref + `requestAnimationFrame` instead of React state to avoid re-rendering every frame.
 
-Because what's a flight sim without telemetry? The panel displays altitude, speed, heading, pitch/bank angles, and the current maneuver progress.
+### Smoke Trails
 
-The telemetry uses a clever optimization: instead of React state updates (which would trigger re-renders every frame), it uses a mutable ref and `requestAnimationFrame` to update the DOM directly.
+Aircraft emit smoke during maneuvers using ribbon trails — triangle strips that fade in alpha and shrink as they age.
 
-### Smoke and Vapor Trails
+## What I Learned
 
-Aircraft emit smoke during pitch, bank, and turn maneuvers using a ribbon-based trail system. The implementation creates triangle strips that fade in alpha over their lifetime and decrease in width as they age.
+1. **AI is incredible at syntax translation** — C to TypeScript, weird binary formats to parsers. Focus on architecture, let AI handle the translation.
 
-## Lessons from the Rebuild
+2. **Don't fix the magic numbers** — Those weird constants in old code often exist for good reasons. Port them verbatim first, adjust later if needed.
 
-The FLYBY2 project demonstrates several principles that apply beyond this specific project:
+3. **Ship the vibe first** — Get the feeling right, then optimize.
 
-1. **Use AI to bridge the syntax gap:** LLMs are incredible at translating logic between languages (C to TS), allowing you to focus on the architecture.
-2. **Port the magic numbers:** Sometimes the specific constants in old code exist for good reasons. Don't "fix" them until you see them running.
-3. **Ship the vibe first:** Get the feeling right before perfecting the implementation.
-4. **Preserve the essence:** A flight sim should _feel_ like a flight sim, regardless of the platform.
+4. **Preserve the essence** — A flight sim should *feel* like flying, regardless of the tech stack.
 
-## Running FLYBY2 Today
+## Try It
 
-You don't need to compile C code to see it fly anymore.
+No need to compile ancient C code.
 
-**[🚀 View the Live Demo Here](https://flyby.vercel.app)**
+**[🚀 Live Demo](https://flyby.vercel.app)**
 
-If you want to poke around the code or run it locally:
+Or run it locally:
 
 ```bash
 git clone https://github.com/arkits/flyby2.git
 cd flyby2
 npm install
 npm run dev
-
 ```
 
-Then open your browser to `http://localhost:5173`. Press `D` to toggle the debug controls, pick your aircraft, choose your maneuver, and watch the sky.
+Open `http://localhost:5173`. Press `D` for debug controls, pick an aircraft, choose a maneuver, and watch it fly.
 
-## Conclusion
+## Why This Matters
 
-FLYBY2 represents something we sometimes forget in modern software development: that code can be joyful. It can be an expression of wonder at the possibility of making things fly across a screen.
+FLYBY2 is a reminder that software can be joyful. That code can be about wonder — about making things fly across a screen just because it's cool.
 
-The vibe coding approach isn't about being careless—it's about being intentional with your energy. It's about recognizing that sometimes the best way to honor the past is to build something new that captures its spirit, using the smartest tools available to get you there.
+"Vibe coding" isn't about being sloppy. It's about being smart with your energy. Using the best tools available to capture the spirit of something, without getting bogged down in the grunt work.
 
-So the next time you find yourself stuck on a legacy migration, remember FLYBY2. Paste that C code into an LLM, ask it to help you fly, and let the aircraft do the talking.
+The next time you're facing a legacy migration, try it. Paste that old code into an LLM. Ask it to help you fly. You might be surprised what takes off.
 
 ---
 
-_FLYBY2 is open source and available on GitHub. The original C implementation by Soji Yamakawa is also available for those who want to explore the vintage code._
+_FLYBY2 is [open source](https://github.com/arkits/flyby2). The original C implementation by Soji Yamakawa is also available for anyone who wants to explore the vintage code._
