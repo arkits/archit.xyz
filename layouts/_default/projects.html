@@ -1,8 +1,8 @@
 {{ define "main" }}
 <article class="projects-page">
   <header class="projects-hero">
-    {{ with .Params.kicker }}
-      <p class="projects-kicker">{{ . }}</p>
+    {{ with .Params.command }}
+      <p class="projects-cmd"><span class="projects-cmd-prompt">$</span> {{ . }}</p>
     {{ end }}
     <h1 class="projects-title">{{ .Title | markdownify }}</h1>
     {{ with .Params.intro }}
@@ -15,63 +15,57 @@
   </header>
 
   {{ with .Params.projects }}
-  <div class="projects-grid">
-    {{ range . }}
-    <article class="project-card">
-      <div class="project-media">
-        {{ if .image }}
-          <img src="{{ .image | relURL }}" alt="{{ .image_alt | default (printf "%s preview" .name) }}" loading="lazy">
-        {{ else }}
-          <div class="project-placeholder" aria-hidden="true">
-            <span>{{ .monogram | default (substr .name 0 1 | upper) }}</span>
-          </div>
+  <ol class="projects-list">
+    {{ range $i, $p := . }}
+    <li class="project-card">
+      <header class="project-head">
+        <span class="project-index">{{ printf "%02d" (add $i 1) }}</span>
+        <h2 class="project-name"><span class="project-path">~/</span>{{ $p.name }}</h2>
+        {{ if or $p.year $p.status }}
+          <span class="project-stamp">
+            {{ with $p.year }}<span class="project-year">{{ . }}</span>{{ end }}
+            {{ with $p.status }}<span class="project-status">[{{ . }}]</span>{{ end }}
+          </span>
         {{ end }}
-      </div>
-      <div class="project-body">
-        <div class="project-header">
-          <h2 class="project-name">{{ .name }}</h2>
-          {{ with .status }}
-            <span class="project-status">{{ . }}</span>
+      </header>
+
+      <div class="project-body{{ if $p.image }} has-media{{ end }}">
+        <div class="project-text">
+          {{ with $p.tagline }}<p class="project-tagline">{{ . }}</p>{{ end }}
+          {{ with $p.description }}<p class="project-desc">{{ . | markdownify }}</p>{{ end }}
+          {{ with $p.highlights }}
+            <ul class="project-highlights">
+              {{ range . }}<li>{{ . | markdownify }}</li>{{ end }}
+            </ul>
           {{ end }}
         </div>
-        {{ with .tagline }}
-          <p class="project-tagline">{{ . }}</p>
+        {{ with $p.image }}
+          <figure class="project-media">
+            <img src="{{ . | relURL }}" alt="{{ $p.image_alt | default (printf "%s preview" $p.name) }}" loading="lazy">
+          </figure>
         {{ end }}
-        {{ with .description }}
-          <p class="project-desc">{{ . }}</p>
-        {{ end }}
-        {{ with .highlights }}
-          <ul class="project-highlights">
-            {{ range . }}
-              <li>{{ . }}</li>
-            {{ end }}
+      </div>
+
+      {{ if or $p.tech $p.links }}
+      <footer class="project-foot">
+        {{ with $p.tech }}
+          <ul class="project-tech" aria-label="Tech stack">
+            {{ range . }}<li>{{ . }}</li>{{ end }}
           </ul>
         {{ end }}
-        <div class="project-meta">
-          {{ with .tech }}
-            <div class="project-tech">
-              {{ range . }}
-                <span>{{ . }}</span>
-              {{ end }}
-            </div>
-          {{ end }}
-          {{ with .year }}
-            <span class="project-year">{{ . }}</span>
-          {{ end }}
-        </div>
-        {{ with .links }}
-          <div class="project-links">
+        {{ with $p.links }}
+          <nav class="project-links" aria-label="{{ $p.name }} links">
             {{ range . }}
-              <a class="project-link {{ .style | default "secondary" }}" href="{{ .url | safeURL }}" {{ if hasPrefix .url "http" }}rel="noopener" target="_blank"{{ end }}>
-                {{ .label }}
-              </a>
+              {{ $external := hasPrefix .url "http" }}
+              <a class="project-link" href="{{ .url | safeURL }}" {{ if $external }}rel="noopener" target="_blank"{{ end }}>{{ .label }}{{ if $external }}<span aria-hidden="true"> ↗</span>{{ end }}</a>
             {{ end }}
-          </div>
+          </nav>
         {{ end }}
-      </div>
-    </article>
+      </footer>
+      {{ end }}
+    </li>
     {{ end }}
-  </div>
+  </ol>
   {{ end }}
 </article>
 {{ end }}

@@ -1,9 +1,103 @@
 ---
 title: "Stuff that I've worked on"
 layout: "projects"
-kicker: "Selected Projects"
-intro: "A handful of builds across web, tooling, and data visualization. Each one started as a personal itch and turned into a product-quality experiment."
+command: "ls -t ~/projects"
+intro: "Things I've built across web, games, tooling, and data visualization. Most started because something annoyed me or looked fun to take apart."
 projects:
+  - name: "tagore"
+    year: "2026"
+    status: "wip"
+    tagline: "Self-hosted AI co-author for long-form fiction."
+    description: "A manuscript editor where the agent edits through tracked suggestions instead of a chat window. You accept or reject each change, from a single word up to a whole chapter."
+    highlights:
+      - "Block-level diff editing: every change is validated against the saved chapter before it shows up as a suggestion."
+      - "Layered, token-budgeted context (story bible, characters, lorebook) keeps long stories consistent."
+    tech: ["TypeScript", "Bun", "tRPC", "React", "SQLite", "TipTap"]
+    links:
+      - label: "github"
+        url: "https://github.com/arkits/tagore"
+  - name: "road-rash"
+    year: "2026"
+    status: "wip"
+    tagline: "Native C++/SDL3 port of the 1996 Windows Road Rash."
+    description: "Runs the game natively on macOS, Linux, Windows, Android, and in the browser via WebAssembly, with no emulation at runtime. Includes online multiplayer for two to eight riders."
+    highlights:
+      - "Simulation matches the original tick for tick in recorded races."
+      - "All 223 original menu items pass the layout sweep; most captured screens match pixel for pixel."
+    tech: ["C++20", "SDL3", "WebAssembly"]
+    links:
+      - label: "play"
+        url: "https://road-rash.archit.xyz/"
+      - label: "github"
+        url: "https://github.com/arkits/road-rash"
+  - name: "carrom"
+    year: "2026"
+    tagline: "3D carrom in the browser."
+    description: "Human vs. bot under simplified ICF singles rules, with deterministic physics, procedural PBR materials, and synthesized audio."
+    highlights:
+      - "Pure TypeScript physics engine: the same board and shot always produce the same frame trace."
+      - "Bot runs a seeded rollout search on the real engine inside a Web Worker."
+    tech: ["TypeScript", "React Three Fiber", "Zustand", "Web Audio"]
+    links:
+      - label: "play"
+        url: "https://carrom.archit.xyz"
+      - label: "github"
+        url: "https://github.com/arkits/carrom"
+  - name: "flyby"
+    year: "2026"
+    tagline: "The FLYBY2 screensaver, rebuilt for the web."
+    description: "A TypeScript/WebGPU reimplementation of Soji Yamakawa's 90s Windows screensaver, aiming for behavior parity with the original C code, plus free-flight and drive sandbox modes."
+    tech: ["TypeScript", "WebGPU", "Bun"]
+    links:
+      - label: "live"
+        url: "https://flyby.archit.xyz/"
+      - label: "github"
+        url: "https://github.com/arkits/flyby"
+      - label: "blog post"
+        url: "/posts/flyby"
+  - name: "ludo"
+    year: "2026"
+    tagline: "Real-time multiplayer Ludo."
+    description: "Room-based games for two to four players with password-protected rooms, anonymous nicknames, and classic rules."
+    tech: ["TypeScript", "React", "Convex"]
+    links:
+      - label: "play"
+        url: "https://ludo.archit.xyz"
+      - label: "github"
+        url: "https://github.com/arkits/ludo"
+  - name: "next-bart"
+    year: "2026"
+    tagline: "When's the next train?"
+    description: "Shows the next BART service between two stations you pick, built on BART's GTFS realtime feeds."
+    tech: ["TypeScript", "Next.js", "GTFS-RT"]
+    links:
+      - label: "live"
+        url: "https://next-bart.vercel.app/"
+      - label: "github"
+        url: "https://github.com/arkits/next-bart"
+  - name: "historian"
+    year: "2026"
+    tagline: "Search your browser history properly."
+    description: "Turns browser history into a local, searchable database with full-text search, entity extraction, and SQL queries."
+    tech: ["TypeScript", "Bun", "React", "tRPC", "PostgreSQL"]
+    links:
+      - label: "live"
+        url: "https://historian.archit.xyz/"
+      - label: "github"
+        url: "https://github.com/arkits/historian"
+      - label: "blog post"
+        url: "/posts/historian"
+  - name: "chaddi-tg"
+    tagline: "Telegram bot for games, economy, and community."
+    description: "Handles chat onboarding and adds mini games, a lightweight economy, and a pile of silly commands to keep group chats lively."
+    tech: ["Python", "tdlib"]
+    links:
+      - label: "telegram"
+        url: "https://t.me/chaddibot"
+      - label: "github"
+        url: "https://github.com/arkits/chaddi-tg"
+      - label: "blog post"
+        url: "/posts/chaddi-tg"
   - name: "onhub-web"
     tagline: "Home network dashboard for Google OnHub and Google Wifi."
     description: "A web client that pulls metrics from the Google Foyer APIs and turns them into a responsive UI plus Prometheus and Grafana integrations."
@@ -12,16 +106,14 @@ projects:
     highlights:
       - "Built a metrics pipeline to surface device health and performance."
       - "Shipped a clean UI for monitoring home network devices."
-    tech:
-      - "Go"
-      - "React"
-      - "Prometheus"
-      - "Grafana"
+    tech: ["Go", "React", "Prometheus", "Grafana"]
     links:
-      - label: "View on GitHub"
+      - label: "github"
         url: "https://github.com/arkits/onhub-web"
-        style: "primary"
+      - label: "blog post"
+        url: "/posts/onhub-web"
   - name: "spring-boot-actuator-cli"
+    year: "2021"
     tagline: "CLI companion for Spring Boot Actuator."
     description: "A command-line app that inspects Actuator endpoints and prints data in human-friendly formats for debugging and operations."
     image: "/img/sba-cli.png"
@@ -29,54 +121,32 @@ projects:
     highlights:
       - "Designed parsers for multiple Actuator endpoints."
       - "Added config file support for multi-service fleets."
-    tech:
-      - "Go"
-      - "Java"
-      - "Spring Boot"
+    tech: ["Go", "Java", "Spring Boot"]
     links:
-      - label: "View on GitHub"
+      - label: "github"
         url: "https://github.com/arkits/spring-boot-actuator-cli"
-        style: "primary"
-      - label: "Read the blog post"
+      - label: "blog post"
         url: "/posts/sba-cli"
-        style: "ghost"
   - name: "newtab"
     tagline: "Personal new tab dashboard."
     description: "A configurable start page that surfaces news, now-playing music, and shortcuts to daily tools."
     image: "/img/newtab.png"
     image_alt: "newtab dashboard"
-    tech:
-      - "JavaScript"
+    tech: ["JavaScript"]
     links:
-      - label: "View on GitHub"
-        url: "https://github.com/arkits/newtab"
-        style: "primary"
-      - label: "Live demo"
+      - label: "live"
         url: "https://newtab.archit.xyz/"
-        style: "ghost"
-  - name: "Exige"
+      - label: "github"
+        url: "https://github.com/arkits/newtab"
+  - name: "exige"
     tagline: "UAM traffic visualizer."
     description: "A proof-of-concept visualizer for UAM and UTM data streams with live mapping and event overlays."
     image: "/img/exige.png"
     image_alt: "Exige map visualization"
-    tech:
-      - "JavaScript"
-      - "React"
-      - "Mapbox"
-      - "Socket.IO"
+    tech: ["JavaScript", "React", "Mapbox", "Socket.IO"]
     links:
-      - label: "View on GitHub"
+      - label: "live"
+        url: "https://arkits.github.io/exige"
+      - label: "github"
         url: "https://github.com/arkits/exige"
-        style: "primary"
-  - name: "chaddi-tg"
-    tagline: "Playful Telegram bot."
-    description: "A Telegram bot packed with utilities and chat-enhancing commands."
-    monogram: "CT"
-    tech:
-      - "Python"
-      - "tdlib"
-    links:
-      - label: "View on GitHub"
-        url: "https://github.com/arkits/chaddi-tg"
-        style: "primary"
 ---
